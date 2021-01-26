@@ -1,0 +1,13 @@
+sudo: required
+
+language: java
+
+services:
+  - docker
+
+after_success:
+  - docker network create --driver bridge SEMCoursework-GroupB
+  - docker pull mongo
+  - docker run -d --name mongo-dbserver --network SEMCoursework-GroupB mongo
+  - docker build -t SEMCoursework-GroupB .
+  - docker run --network SEMCoursework-GroupB SEMCoursework_GroupB
