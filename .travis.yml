@@ -6,8 +6,8 @@ services:
   - docker
 
 after_success:
-  - docker network create --driver bridge SEMCoursework-GroupB
+  - docker network create --driver bridge semcoursework-groupb
   - docker pull mongo
-  - docker run -d --name mongo-dbserver --network SEMCoursework-GroupB mongo
-  - docker build -t SEMCoursework_GroupB .
-  - docker run --network SEMCoursework-GroupB SEMCoursework_GroupB
+  - docker run -d --name mongo-dbserver --network semcoursework-groupb mongo
+  - docker build -t semcoursework_groupb .
+  - docker run --network semcoursework-groupb semcoursework_groupb
