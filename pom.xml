@@ -8,15 +8,13 @@
     <artifactId>semcourseworkgroupb</artifactId>
     <version>0.1.0.6</version>
 
-
     <dependencies>
         <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver</artifactId>
-            <version>3.6.4</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.44</version>
         </dependency>
     </dependencies>
-
 
     <properties>
         <maven.compiler.source>10</maven.compiler.source>
