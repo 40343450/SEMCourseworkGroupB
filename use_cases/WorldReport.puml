@@ -1,0 +1,559 @@
+@startuml
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC1 as "report of all the countries in the world organised by largest population to smallest"
+
+usecase UCp as "Print countries"
+
+USER - UC1
+UC1 ..> UCp : include
+UC1 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC2 as "report of all the countries in a continent organised by largest population to smallest."
+
+usecase UCp as "Print countries"
+
+USER - UC2
+UC2 ..> UCp : include
+UC2 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC3 as "report of all the countries in a region organised by largest population to smallest"
+
+usecase UCp as "Print countries"
+
+USER - UC3
+UC3 ..> UCp : include
+UC3 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC4 as "report about the top N populated countries in the world where N is provided by the user."
+
+usecase UCp as "Print countries"
+
+USER - UC4
+UC4 ..> UCp : include
+UC4 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC5 as "report about the top N populated countries in a continent where N is provided by the user."
+
+usecase UCp as "Print countries"
+
+USER - UC5
+UC5 ..> UCp : include
+UC5 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC6 as "report about the top N populated countries in a region where N is provided by the user."
+
+usecase UCp as "Print countries"
+
+USER - UC6
+UC6 ..> UCp : include
+UC6 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC7 as "report about all the cities in the world organised by largest population to smallest."
+
+usecase UCp as "Print cities"
+
+USER - UC7
+UC7 ..> UCp : include
+UC7 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC8 as "report about all the cities in a continent organised by largest population to smallest."
+
+usecase UCp as "Print cities"
+
+USER - UC8
+UC8 ..> UCp : include
+UC8 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC9 as "report about all the cities in a region organised by largest population to smallest."
+
+usecase UCp as "Print cities"
+
+USER - UC9
+UC9 ..> UCp : include
+UC9 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC10 as "report about all the cities in a country organised by largest population to smallest."
+
+usecase UCp as "Print cities"
+
+USER - UC10
+UC10 ..> UCp : include
+UC10 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC11 as "report about all the cities in a district organised by largest population to smallest."
+
+usecase UCp as "Print cities"
+
+USER - UC11
+UC11 ..> UCp : include
+UC11 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC12 as "report about the top N populated cities in the world where N is provided by the user."
+
+usecase UCp as "Print cities"
+
+USER - UC12
+UC12 ..> UCp : include
+UC12 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC13 as "report about the top N populated cities in a continent where N is provided by the user."
+
+usecase UCp as "Print cities"
+
+USER - UC13
+UC13 ..> UCp : include
+UC13 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC14 as "report about the top N populated cities in a region where N is provided by the user."
+
+usecase UCp as "Print cities"
+
+USER - UC14
+UC14 ..> UCp : include
+UC14 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC15 as "report about the top N populated cities in a country where N is provided by the user."
+
+usecase UCp as "Print cities"
+
+USER - UC15
+UC15 ..> UCp : include
+UC15 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC16 as "report about the top N populated cities in a district where N is provided by the user."
+
+usecase UCp as "Print cities"
+
+USER - UC16
+UC16 ..> UCp : include
+UC16 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC17 as "report about all the capital cities in the world organised by largest population to smallest."
+
+usecase UCp as "Print capital cities"
+
+USER - UC17
+UC17 ..> UCp : include
+UC17 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC18 as "report about all the capital cities in a continent organised by largest population to smallest."
+
+usecase UCp as "Print capital cities"
+
+USER - UC18
+UC18 ..> UCp : include
+UC18 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC19 as "report about all the capital cities in a region organised by largest to smallest."
+
+usecase UCp as "Print capital cities"
+
+USER - UC19
+UC19 ..> UCp : include
+UC19 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC20 as "report about the top N populated capital cities in the world where N is provided by the user."
+
+usecase UCp as "Print capital cities"
+
+USER - UC20
+UC20 ..> UCp : include
+UC20 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC21 as "report about the top N populated capital cities in a continent where N is provided by the user."
+
+usecase UCp as "Print capital cities"
+
+USER - UC21
+UC21 ..> UCp : include
+UC21 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC22 as "report about he top N populated capital cities in a region where N is provided by the user."
+
+usecase UCp as "Print capital cities"
+
+USER - UC22
+UC22 ..> UCp : include
+UC22 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC23 as "report about the population of people, people living in cities, and people not living in cities in each continent."
+
+usecase UCp as "Print people"
+
+USER - UC23
+UC23 ..> UCp : include
+UC23 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC24 as "report about the population of people, people living in cities, and people not living in cities in each region."
+
+usecase UCp as "Print people"
+
+USER - UC24
+UC24 ..> UCp : include
+UC24 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC25 as "report about the population of people, people living in cities, and people not living in cities in each country."
+
+usecase UCp as "Print people"
+
+USER - UC25
+UC25 ..> UCp : include
+UC25 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC26 as "make information about the population of the world, population of any continent, population of any region,
+ population of any country, population of any district and population of any city accessible to the organisation."
+
+usecase UCp as "Print population"
+
+USER - UC26
+UC26 ..> UCp : include
+UC26 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC27 as "provided a number of people who speak Chinese."
+
+usecase UCp as "Print number of speakers"
+
+USER - UC27
+UC27 ..> UCp : include
+UC27 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC28 as "provided a number of people who speak English."
+
+usecase UCp as "Print number of speakers"
+
+USER - UC28
+UC28 ..> UCp : include
+UC28 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC29 as "provided a number of people who speak Hindi."
+
+usecase UCp as "Print number of speakers"
+
+USER - UC29
+UC29 ..> UCp : include
+UC29 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC30 as "provided a number of people who speak Spanish."
+
+usecase UCp as "Print number of speakers"
+
+USER - UC30
+UC30 ..> UCp : include
+UC30 - Database
+
+}
+
+newpage
+
+actor USER as "USER"
+
+rectangle Database
+
+rectangle "World Report System"{
+
+usecase UC31 as "provided a number of people who speak Arabic."
+
+usecase UCp as "Print number of speakers"
+
+USER - UC31
+UC31 ..> UCp : include
+UC31 - Database
+
+}
+@enduml
