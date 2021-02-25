@@ -1,17 +1,20 @@
 #Produce a Report of all the countries in the world organised by largest population to smallest
 
 ##Goal
+
 As a user I would like to generate a report about all the countries in the world organised by largest population to smallest.
 
 ##Scope
+
 Company.
 
 ##Level
+
 Primary tasks.
 
 ##Preconditions
-we have a database containing the information about the countries and their assocaited population.
 
+we have a database containing the information about the countries and their assocaited population.
 
 ##Success End Conditions
 
@@ -26,6 +29,7 @@ No report showing all the countries in the world organised by largest population
 User.
 
 ##Trigger
+
 The organisation needs this report to be available to users
 
 ##Main Success Scenario

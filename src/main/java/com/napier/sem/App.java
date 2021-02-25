@@ -1,8 +1,20 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
+
+/**
+ * The type App.
+ *
+ * @author scottmcmahon 40343450
+ */
 public class App {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         // Create new Application
         App a = new App();
@@ -10,8 +22,17 @@ public class App {
         // Connect to database
         a.connect();
 
+        //TODO remove this in future releases!!!!
+        //testing a get countries method for the moment.
+        for(Country c : a.getCountry())
+        {
+            System.out.println(c.getName());
+        }
+
+
         // Disconnect from database
         a.disconnect();
+
     }
 
 
@@ -21,7 +42,7 @@ public class App {
     private Connection con = null;
 
     /**
-     * Connect to the MySQL database.
+     * Connect.
      */
     public void connect() {
         try {
@@ -64,4 +85,49 @@ public class App {
             }
         }
     }
+
+    /**
+     * Gets country.
+     *
+     * @return the country or null if exception hit
+     */
+    public ArrayList<Country> getCountry()
+    {
+        //TODO review this as it was quickly written to prove MYSQL
+        // Docker image is working and connected as expected
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT code, name, continent, region, population, capital FROM country ORDER BY Population DESC;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country> countries  = new ArrayList<>();
+            // Check one is returned
+            while (rset.next())
+            {
+                Country cnt = new Country();
+                cnt.code = rset.getString("code");
+                cnt.name = rset.getString("name");
+                cnt.continent = rset.getString("continent");
+                cnt.region = rset.getString("region");
+                cnt.population = rset.getInt("population");
+                cnt.capital = rset.getInt("capital");
+                countries.add(cnt);
+            }
+            return countries;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
+
+
+
 }
