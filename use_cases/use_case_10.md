@@ -31,12 +31,13 @@ The organisation needs this report to be available to users
 ##Main Success Scenario
 
 >- Report is created
->- Report details population of regions within countries
+>- Report details population of cities in a district
 >- Report is available to users
 
 ##Extensions
 
->- Region does not exist:
+>- City does not exist:
+>- Country does not exist:
 >- User is notified
 
 ##Sub-variations
