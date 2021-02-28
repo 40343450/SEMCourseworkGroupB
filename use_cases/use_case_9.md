@@ -10,7 +10,7 @@ Company.
 Primary tasks.
 
 ##Preconditions
-we have a database containing the information about all the cities in a region, and the associated population of these regions.
+we have a database containing the information about all the cities in a region, and the associated population of these cities.
 
 
 ##Success End Conditions
@@ -31,12 +31,13 @@ The organisation needs this report to be available to users
 ##Main Success Scenario
 
 >- Report is created
->- Report details population of regions within countries
+>- Report details population of all the cities in each region
 >- Report is available to users
 
 ##Extensions
 
 >- Region does not exist:
+>- City does not exist:
 >- User is notified
 
 ##Sub-variations
