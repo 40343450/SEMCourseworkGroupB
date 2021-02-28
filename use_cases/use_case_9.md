@@ -10,16 +10,16 @@ Company.
 Primary tasks.
 
 ##Preconditions
-we have a database containing the information about the regions within countries, and the associated population of these regions.
+we have a database containing the information about all the cities in a region, and the associated population of these regions.
 
 
 ##Success End Conditions
 
-A report showing all the regions within all the countries in the world organised by largest population to smallest.
+A report showing all the cities in a region organised by largest population to smallest.
 
 ##Failed End Conditions
 
-No report showing all the regions within all the countries in the world organised by largest population to smallest.
+No report showing all the cities in a region organised by largest population to smallest.
 
 ##Primary Actor
 
