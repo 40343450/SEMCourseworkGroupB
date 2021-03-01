@@ -1,7 +1,7 @@
-#Produce a Report of all the countries in the world organised by largest population to smallest
+#Produce a Report about the population of the world, population of any continent, population of any region, population of any country, population of any district and population of any city accessible to the organisation.
 
 ##Goal
-As a user I would like to generate a report about all the countries in the world organised by largest population to smallest.
+As a user I would like to make information about the population of the world, population of any continent, population of any region, population of any country, population of any district and population of any city accessible to the organisation.
 
 ##Scope
 Company.
@@ -10,16 +10,16 @@ Company.
 Primary tasks.
 
 ##Preconditions
-we have a database containing the information about the countries and their assocaited population.
+we have a database containing the information about the world's countries, continents, regions and cities with their assocaited population.
 
 
 ##Success End Conditions
 
-A report showing all the countries in the world organised by largest population to smallest.
+A report showing the population of the world, population of any continent, population of any region, population of any country, population of any district and population of any city accessible to the organisation.
 
 ##Failed End Conditions
 
-No report showing all the countries in the world organised by largest population to smallest.
+No report showing the population of the world, population of any continent, population of any region, population of any country, population of any district and population of any city accessible to the organisation.
 
 ##Primary Actor
 
@@ -31,12 +31,16 @@ The organisation needs this report to be available to users
 ##Main Success Scenario
 
 >- Report is created
->- Report details population of countries
+>- Report detailing the population of the world, population of any continent, population of any region, population of any country, population of any district and population of any city accessible to the organisation.
 >- Report is available to users
 
 ##Extensions
 
 >- Country does not exist:
+>- Continent does not exist:
+>- Region does not exist:
+>- District does not exist:
+>- City does not exist:
 >- User is notified
 
 ##Sub-variations
