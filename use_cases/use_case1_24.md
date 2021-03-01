@@ -13,11 +13,11 @@ we have a database containing the information about the cities and their assocai
 
 ##Success End Conditions
 
-A report showing the population of people, people living in cities and people not living in cities in each region
+A report showing the population of people, people living in cities and people not living in cities in each country
 
 ##Failed End Conditions
 
-No report showing the population of people, people living in cities and people not living in cities in each region
+No report showing the population of people, people living in cities and people not living in cities in each country
 
 ##Primary Actor
 
@@ -29,7 +29,7 @@ The organisation needs this report to be available to users
 ##Main Success Scenario
 
 >- Report is created
->- Report details the population of people, people living in cities and people not living in cities in each region
+>- Report details the population of people, people living in cities and people not living in cities in each country
 >- Report is available to users
 
 ##Extensions
