@@ -1,7 +1,7 @@
-#Produce a Report of all the countries in the world organised by largest population to smallest
+#Generate Report of Number of People in the world who speak English.
 
 ##Goal
-As a user I would like to generate a report about all the countries in the world organised by largest population to smallest.
+As a user I would like to be provided a number of people who speak English.
 
 ##Scope
 Company.
@@ -10,16 +10,16 @@ Company.
 Primary tasks.
 
 ##Preconditions
-we have a database containing the information about the countries and their assocaited population.
+we have a database containing the information about the countries and the number of people who speak English.
 
 
 ##Success End Conditions
 
-A report showing all the countries in the world organised by largest population to smallest.
+A report showing all the English speakers.
 
 ##Failed End Conditions
 
-No report showing all the countries in the world organised by largest population to smallest.
+No report showing all the people who can speak English.
 
 ##Primary Actor
 
@@ -31,12 +31,12 @@ The organisation needs this report to be available to users
 ##Main Success Scenario
 
 >- Report is created
->- Report details population of countries
+>- Report details population who can speak English
 >- Report is available to users
 
 ##Extensions
 
->- Country does not exist:
+>- Language does not exist:
 >- User is notified
 
 ##Sub-variations
