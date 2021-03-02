@@ -1,53 +1,54 @@
-#Produce a Report of the top N populated countries in a region where N is provided by the user.
+# USE CASE 
+# Produce a Report of the top N populated countries in a region where N is provided by the user.
 
-##Goal
+## Goal
 
-As a user I want to produce a report of the the top N populated countries in a region where N is provided by the user so that the data can be used by the organisation
+As a user I want to produce a report of the top N populated countries in a region where N is provided by the user
 
-##Scope
+## Scope
 
 Company.
 
-##Level
+## Level
 
 Primary task.
 
-##Preconditions
+## Preconditions
 
 The database contains the information about the regions their countries and their populations
 
-##Success End Condition
+## Success End Condition
 
-A report is available for user to view.
+A report of the top N populated countries in a region where N is provided by the user is available for user to view.
 
-##Failed End Condition
+## Failed End Condition
 
-No report is produced.
+No report of the top N populated countries in a region where N is provided by the user is produced.
 
-##Primary Actor
+## Primary Actor
 
 User.
 
-##Trigger
+## Trigger
 
 The organisation needs this report to be available to users
 
-##Main Success Scenario
+## Main Success Scenario
 
 >- User inputs N
 >- Report is created
->- Report details population of countries
-4. Report is available to users
+>- Report details population of countries in a region with count equal to N organised by largest population to smallest
+>- Report is available to users
 
-##Extensions
+## Extensions
 
 >- Country does not exist:
 >- User is notified
 
-##Sub-variations
+## Sub-variations
 
 None.
 
-##SCHEDULE
+## SCHEDULE
 
 DUE DATE: Release 1.0

@@ -1,46 +1,48 @@
+# USE CASE 
+# Produce a Report about the population of people, people living in cities and people not living in cities in each region
 
-##Goal
+## Goal
 As a user i would like to generate a report about the population of people, people living in cities and people not living in cities in each region
-##Scope
+## Scope
 Company.
 
-##Level
+## Level
 Primary tasks.
 
-##Preconditions
+## Preconditions
 we have a database containing the information about the cities and their assocaited population.
 
 
-##Success End Conditions
+## Success End Conditions
 
 A report showing the population of people, people living in cities and people not living in cities in each country
 
-##Failed End Conditions
+## Failed End Conditions
 
 No report showing the population of people, people living in cities and people not living in cities in each country
 
-##Primary Actor
+## Primary Actor
 
 User.
 
-##Trigger
+## Trigger
 The organisation needs this report to be available to users
 
-##Main Success Scenario
+## Main Success Scenario
 
 >- Report is created
 >- Report details the population of people, people living in cities and people not living in cities in each country
 >- Report is available to users
 
-##Extensions
+## Extensions
 
 >- City does not exist:
 >- User is notified
 
-##Sub-variations
+## Sub-variations
 
 None.
 
-##SCHEDULE
+## SCHEDULE
 
 DUE DATE: Release 1.0

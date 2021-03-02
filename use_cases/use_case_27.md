@@ -1,48 +1,49 @@
-#Generate Report of Number of People in the world who speak Chinese.
+# USE CASE 
+# Generate Report of Number of People in the world who speak Chinese.
 
-##Goal
+## Goal
 As a user I would like to be provided a number of people who speak Chinese.
 
-##Scope
+## Scope
 Company.
 
-##Level
+## Level
 Primary tasks.
 
-##Preconditions
+## Preconditions
 we have a database containing the information about the countries and the number of people who speak Chinese.
 
 
-##Success End Conditions
+## Success End Conditions
 
 A report showing all the Chinese speakers.
 
-##Failed End Conditions
+## Failed End Conditions
 
 No report showing all the people who can speak Chinese.
 
-##Primary Actor
+## Primary Actor
 
 User.
 
-##Trigger
+## Trigger
 The organisation needs this report to be available to users
 
-##Main Success Scenario
+## Main Success Scenario
 
 >- Report is created
 >- Report details population who can speak Chinese
 >- Report is available to users
 
-##Extensions
+## Extensions
 
 >- Language does not exist:
 >- User is notified
 
-##Sub-variations
+## Sub-variations
 
 None.
 
-##SCHEDULE
+## SCHEDULE
 
 DUE DATE: Release 1.0

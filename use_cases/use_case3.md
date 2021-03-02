@@ -1,52 +1,53 @@
-#Produce a Report of all the countries in a region organised by largest population to smallest.
+# USE CASE 
+# Produce a Report of all the countries in a region organised by largest population to smallest.
 
-##Goal
+## Goal
 
-As a user I want to produce a report of all the countries in a region organised by largest population to smallest so that the data can be used by the organisation
+As a user I want to produce a report of all the countries in a region organised by largest population to smallest
 
-##Scope
+## Scope
 
 Company.
 
-##Level
+## Level
 
 Primary task.
 
-##Preconditions
+## Preconditions
 
 The database contains the information about the regions their countries and their populations
 
-##Success End Condition
+## Success End Condition
 
-A report is available for user to view.
+A report of all the countries in a region organised by largest population to smallest is available for user to view.
 
-##Failed End Condition
+## Failed End Condition
 
-No report is produced.
+No report of all the countries in a region organised by largest population to smallest is produced.
 
-##Primary Actor
+## Primary Actor
 
 User.
 
-##Trigger
+## Trigger
 
 The organisation needs this report to be available to users
 
-##Main Success Scenario
+## Main Success Scenario
 
 >- Report is created
->- Report details population of countries
+>- Report details population of countries in a region organised by largest population to smallest
 >- Report is available to users
 
-##Extensions
+## Extensions
 
 >- Country does not exist:
 >- User is notified
 
-##Sub-variations
+## Sub-variations
 
 None.
 
-##SCHEDULE
+## SCHEDULE
 
 DUE DATE: Release 1.0

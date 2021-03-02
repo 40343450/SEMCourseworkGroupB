@@ -15,10 +15,10 @@ This is group B's coursework submission for SET08403 2020-1 TR2 001.
 ---
 
 This group consists of:
-* Hilton, James - <B>40456918</b>
-* Mccollum, Daniel - <b>40456785</b>
-* Mcmahon, Scott - <b>40343450</b>
-* Munford, Andrew - <b>40456784</b>
+* Hilton, James - <B>40456918</b> - https://github.com/Jameshilton97
+* Mccollum, Daniel - <b>40456785</b> - https://github.com/CastleRush6
+* Mcmahon, Scott - <b>40343450</b> - https://github.com/40343450
+* Munford, Andrew - <b>40456784</b> - https://github.com/AndyMunty
 
 Group contribution is recorded here at the linked spreadsheet below as well as GitHub metrics and analytics.\
 [Individual Assessment SET08103 Group B.xlsx](https://livenapierac-my.sharepoint.com/:x:/g/personal/40343450_live_napier_ac_uk/EV0VrnH2uO1Lv-HvMDOVHikBQK6-iSv6zNbwzI5-rAZtAQ?e=KNxVKQ)

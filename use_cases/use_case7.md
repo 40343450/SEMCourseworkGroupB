@@ -1,7 +1,9 @@
-#Produce a Report of all the cities in the world organised by largest population to smallest.
-##Goal
+# USE CASE 
+# Produce a Report of all the cities in the world organised by largest population to smallest.
 
-As a user I want to produce a report of all the cities in the world organised by largest population to smallest so that the data can be used by the organisation
+## Goal
+
+As a user I want to produce a report of all the cities in the world organised by largest population to smallest
 
 ## Scope
 
@@ -17,11 +19,11 @@ The database contains the information about the cities and their populations
 
 ## Success End Condition
 
-A report is available for user to view.
+A report of all the cities in the world organised by largest population to smallest is available for user to view.
 
 ## Failed End Condition
 
-No report is produced.
+No report of all the cities in the world organised by largest population to smallest is produced.
 
 ## Primary Actor
 
@@ -34,7 +36,7 @@ The organisation needs this report to be available to users
 ## Main Success Scenario
 
 >- Report is created
->- Report details population of countries
+>- Report details population of cities in the world organised by largest population to smallest
 >- Report is available to users
 
 ## Extensions
