@@ -1,4 +1,7 @@
 import com.napier.sem.App;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The type App test.
@@ -19,5 +22,13 @@ public class AppTest {
     {
         app = new App();
     }
+
+    @Test
+    void unitTest()
+    {
+        assertEquals(5, 5);
+    }
+
+
 
 }
