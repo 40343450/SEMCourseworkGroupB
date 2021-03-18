@@ -29,7 +29,7 @@ public class Country {
     /**
      * The Capital.
      */
-    public String capital;
+    public int capital;
 
     /**
      * The Surface area.

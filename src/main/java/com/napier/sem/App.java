@@ -296,7 +296,6 @@ public class App {
         System.out.println("\n\nUSE CASE: 32\n\n");
 
 
-
         // Disconnect from database
         a.disconnect();
     }
@@ -324,7 +323,7 @@ public class App {
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
@@ -511,7 +510,7 @@ public class App {
 
     private ArrayList<Country> getCountries(String filterType, String filter, String sqlStatement) {
         //DEBUG System.out.println(sqlStatement);
-        if(filterType!=WORLD && !(filter == null || filter.isEmpty()))
+        if(!filterType.equals(WORLD) && !(filter == null || filter.isEmpty()))
         {
             try
             {
@@ -527,7 +526,7 @@ public class App {
                 return null;
             }
         }
-        else if (filterType==WORLD && (filter == null || filter.isEmpty()))
+        else if (filterType.equals(WORLD) && (filter == null || filter.isEmpty()))
         {
             try
             {
@@ -558,13 +557,11 @@ public class App {
             cnt.continent = rset.getString("continent");
             cnt.region = rset.getString("region");
             cnt.population = rset.getInt("population");
-            cnt.capital = rset.getString("capital");
+            cnt.capital = rset.getInt("capital");
             countries.add(cnt);
         }
         return countries;
     }
-
-
 
     /*
     *
@@ -616,12 +613,13 @@ public class App {
     public void printCountries(ArrayList<Country> countries)
     {
         if(countries != null && !countries.isEmpty()) {
-            System.out.println(String.format(FIXED_WIDTH_FORMATTING, "Country Code", "Country Name", "Country Continent", "Country Region", "Country Population", "Country Capital"));
+            System.out.printf((FIXED_WIDTH_FORMATTING) + "%n", "Country Code", "Country Name", "Country Continent", "Country Region", "Country Population", "Country Capital");
             for (Country country : countries) {
                 String country_string =
                         String.format(FIXED_WIDTH_FORMATTING,
                                 country.code, country.name, country.continent, country.region, country.population, country.capital);
                 System.out.println(country_string);
+                System.out.printf();
             }
         }
         else
