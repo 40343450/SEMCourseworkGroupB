@@ -619,7 +619,6 @@ public class App {
                         String.format(FIXED_WIDTH_FORMATTING,
                                 country.code, country.name, country.continent, country.region, country.population, country.capital);
                 System.out.println(country_string);
-                System.out.printf();
             }
         }
         else
