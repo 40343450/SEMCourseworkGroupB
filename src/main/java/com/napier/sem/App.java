@@ -571,7 +571,7 @@ public class App {
             cnt.continent = rset.getString("continent");
             cnt.region = rset.getString("region");
             cnt.population = rset.getInt("population");
-            cnt.capital = rset.getInt("capital");
+            cnt.capital = rset.getString("capital");
             countries.add(cnt);
         }
         return countries;
@@ -637,7 +637,7 @@ public class App {
         }
         else
         {
-            throw new NullPointerException("ERROR! - Countries List Is Empty!");
+            System.out.println("ERROR! - Countries List Is Empty!");
         }
     }
 }

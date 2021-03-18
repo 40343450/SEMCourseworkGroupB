@@ -43,7 +43,7 @@ public class AppTest {
         cnt.continent = "Europe";
         cnt.region = "Northern Europe";
         cnt.population = 5500000;
-        cnt.capital = 1;
+        cnt.capital = "Peking";
         countries.add(cnt);
         app.printCountries(countries);
     }

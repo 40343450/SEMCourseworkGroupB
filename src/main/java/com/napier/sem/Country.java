@@ -27,7 +27,7 @@ public class Country {
     /**
      * The Capital.
      */
-    public int capital;
+    public String capital;
 
 
     /**
@@ -46,7 +46,7 @@ public class Country {
      * @param population the population
      * @param capital    the capital
      */
-    public Country(String code, String name, String continent, String region, int population, int capital) {
+    public Country(String code, String name, String continent, String region, int population, String capital) {
         this.code = code;
         this.name = name;
         this.continent = continent;
@@ -163,7 +163,7 @@ public class Country {
      *
      * @return the capital
      */
-    public int getCapital() {
+    public String getCapital() {
         return capital;
     }
 
@@ -172,7 +172,7 @@ public class Country {
      *
      * @param capital the capital
      */
-    public void setCapital(int capital) {
+    public void setCapital(String capital) {
         this.capital = capital;
     }
 }
