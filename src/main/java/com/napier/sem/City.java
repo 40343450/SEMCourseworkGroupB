@@ -16,7 +16,7 @@ public class City {
     /**
      * The Country code.
      */
-    public String countryCode;
+    public String country;
     /**
      * The District.
      */
@@ -37,14 +37,14 @@ public class City {
      *
      * @param id          the id
      * @param name        the name
-     * @param countryCode the country code
+     * @param country the country code
      * @param district    the district
      * @param population  the population
      */
-    public City(Integer id, String name, String countryCode, String district, Integer population) {
+    public City(Integer id, String name, String country, String district, Integer population) {
         this.id = id;
         this.name = name;
-        this.countryCode = countryCode;
+        this.country = country;
         this.district = district;
         this.population = population;
     }
@@ -54,7 +54,7 @@ public class City {
         return "City{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", countryCode='" + countryCode + '\'' +
+                ", countryCode='" + country + '\'' +
                 ", district='" + district + '\'' +
                 ", population=" + population +
                 '}';
@@ -102,16 +102,16 @@ public class City {
      * @return the country code
      */
     public String getCountryCode() {
-        return countryCode;
+        return country;
     }
 
     /**
      * Sets country code.
      *
-     * @param countryCode the country code
+     * @param country the country code
      */
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setCountryCode(String country) {
+        this.country = country;
     }
 
     /**

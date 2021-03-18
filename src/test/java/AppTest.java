@@ -29,14 +29,14 @@ public class AppTest {
     @Test
     void printCountryTestEmpty()
     {
-        ArrayList<Country> country = new ArrayList<Country>();
+        ArrayList<Country> country = new ArrayList<>();
         app.printCountries(country);
     }
     //test for null list
     @Test
     void printCountryTestContainsNull()
     {
-        ArrayList<Country> countries = new ArrayList<Country>();
+        ArrayList<Country> countries = new ArrayList<>();
         countries.add(null);
         app.printCountries(countries);
     }
@@ -44,33 +44,16 @@ public class AppTest {
     @Test
     void printCountries()
     {
-        ArrayList<Country> countries = new ArrayList<Country>();
+        ArrayList<Country> countries = new ArrayList<>();
         Country cnt = new Country();
         cnt.code = "1";
         cnt.name = "Scotland";
         cnt.continent = "Europe";
-        cnt.region = "The Best";
-        cnt.population = 6000000;
+        cnt.region = "Northern Europe";
+        cnt.population = 5500000;
         cnt.capital = 1;
         countries.add(cnt);
         app.printCountries(countries);
     }
-    //test null continent
-//    @Test
-//    void printContinentTestNull()
-//    {
-//        Continent cont;
-//        cont = null;
-//        app.printContinent(cont);
-//    }
-//    //test happy path
-//    @Test
-//    void printContinent()
-//    {
-//        Continent cont = new Continent();
-//        cont.setContinentName("Europe");
-//        cont.setPopulation(100000000);
-//        app.printContinent(cont);
-//    }
 
 }

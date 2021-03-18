@@ -9,7 +9,13 @@ import java.util.ArrayList;
  */
 public class App {
 
-    private static final String FIXED_WIDTH_FORMATTING="%-15s %-65s %-35s %-45s %-20s %-20s";
+    private static final String FIXED_WIDTH_FORMATTING_WORLD="%-15s %-65s %-35s %-45s %-20s %-20s";//6
+
+    private static final String FIXED_WIDTH_FORMATTING_CITY="%-35s %-35s %-35s %-35s";//4
+
+    private static final String FIXED_WIDTH_FORMATTING_CAP_CITY="%-35s %-35s %-35s";//3
+
+    private static final String FIXED_WIDTH_FORMATTING_POPULATION="%-35s %-35s %-35s %-35s %-35s %-35s";//6
 
     private static final String WORLD = "world";
 
@@ -70,26 +76,25 @@ public class App {
         // Connect to database
         a.connect();
 
-        //TODO REFACTOR >> REDUCE DUPLICATION BY IMPLEMENTING METHODS WHICH TAKE IN ARGUMENTS BASED ON WHAT IS BEING ASKED FO
-        //TODO IMPLEMENT ALL USE CASES REMAINING (1,2,3 IMPLEMENTED)
-
-
         /*
         * USE CASE 1
         * */
-        System.out.println("\n\nUSE CASE 1\n\nAs a user I would like to generate a report about all the countries in the world organised by largest population to smallest:\n\n");
+        System.out.println("\n\nUSE CASE 1\n\nAs a user I would like to generate a report about all the" +
+                " countries in the world organised by largest population to smallest:\n\n");
         a.printCountries(a.getCountryList(WORLD,null));
 
         /*
          * USE CASE 2
          * */
-        System.out.println("\n\nUSE CASE 2\n\nAs a user I would like to generate a report about all the countries in a continent organised by largest population to smallest:\n\n");
+        System.out.println("\n\nUSE CASE 2\n\nAs a user I would like to generate a report about all the" +
+                " countries in a continent organised by largest population to smallest:\n\n");
         a.printCountries(a.getCountryList(CONTINENT,"Asia"));
 
         /*
          * USE CASE 3
          * */
-        System.out.println("\n\nUSE CASE 3\n\nAs a user I would like to generate a report about all the countries in a region organised by largest population to smallest:\n\n");
+        System.out.println("\n\nUSE CASE 3\n\nAs a user I would like to generate a report about all the" +
+                " countries in a region organised by largest population to smallest:\n\n");
         a.printCountries(a.getCountryList(REGION,"Eastern Asia"));
 
 
@@ -319,7 +324,8 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "coursework");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root",
+                        "coursework");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
@@ -362,7 +368,8 @@ public class App {
             case REGION:
                 return getCountryListByRegion(filterType, filter);
             default:
-                throw new IllegalArgumentException("ERROR! - INVALID ARGUMENTS PASSED:\n\n" + "Filter: " + filter + "\nFilter Type: " + filterType);
+                throw new IllegalArgumentException("ERROR! - INVALID ARGUMENTS PASSED:\n\n" + "Filter: " + filter +
+                        "\nFilter Type: " + filterType);
         }
     }
 
@@ -385,7 +392,8 @@ public class App {
             case REGION:
                 return getCountryListByRegionLimitByN(filterType,filter, maxRows);
             default:
-                throw new IllegalArgumentException("ERROR! - INVALID ARGUMENTS PASSED:\n\n" + "Filter: " + filter + "\nFilter Type: " + filterType + "\nMax rows: " + maxRows);
+                throw new IllegalArgumentException("ERROR! - INVALID ARGUMENTS PASSED:\n\n" + "Filter: " + filter +
+                        "\nFilter Type: " + filterType + "\nMax rows: " + maxRows);
         }
     }
 
@@ -409,11 +417,13 @@ public class App {
     {
         if(maxRows != null && maxRows > 0)
         {
-            return getCountries(filterType,null, COUNTRY_SELECT_STATEMENT_WORLD + LIMIT_ROWS_RETURNED + maxRows + STATEMENT_END);
+            return getCountries(filterType,null, COUNTRY_SELECT_STATEMENT_WORLD + LIMIT_ROWS_RETURNED
+                    + maxRows + STATEMENT_END);
         }
         else
         {
-            System.out.println("ERROR:  getCountryListByWorldLimitByN(String filterType,Integer maxRows)\n\nMaxRows invalid!");
+            System.out.println("ERROR:  getCountryListByWorldLimitByN(String filterType,Integer maxRows)\n\nMaxRows" +
+                    " invalid!");
             return null;
         }
     }
@@ -450,11 +460,13 @@ public class App {
         {
             if(maxRows != null && maxRows > 0)
             {
-                return getCountries(filterType,continent, COUNTRY_SELECT_STATEMENT_BY_CONTINENT + LIMIT_ROWS_RETURNED + maxRows + STATEMENT_END);
+                return getCountries(filterType,continent, COUNTRY_SELECT_STATEMENT_BY_CONTINENT +
+                        LIMIT_ROWS_RETURNED + maxRows + STATEMENT_END);
             }
             else
             {
-                System.out.println("ERROR: getCountryListByContinentLimitByN(String filterType,String continent, Integer maxRows)\n\nMaxRows invalid!");
+                System.out.println("ERROR: getCountryListByContinentLimitByN(String filterType,String continent," +
+                        " Integer maxRows)\n\nMaxRows invalid!");
                 return null;
             }
         }
@@ -493,11 +505,13 @@ public class App {
         if(region != null && !region.isEmpty()) {
             if(maxRows != null && maxRows > 0)
             {
-                return getCountries(filterType,region, COUNTRY_SELECT_STATEMENT_BY_REGION + LIMIT_ROWS_RETURNED + maxRows.toString() + STATEMENT_END);
+                return getCountries(filterType,region, COUNTRY_SELECT_STATEMENT_BY_REGION +
+                        LIMIT_ROWS_RETURNED + maxRows.toString() + STATEMENT_END);
             }
             else
             {
-                System.out.println("ERROR: getCountryListByRegionLimitByN(String filterType,String region, Integer maxRows)\n\nMaxRows invalid!");
+                System.out.println("ERROR: getCountryListByRegionLimitByN(String filterType,String region, " +
+                        "Integer maxRows)\n\nMaxRows invalid!");
                 return null;
             }
         }
@@ -613,10 +627,10 @@ public class App {
     public void printCountries(ArrayList<Country> countries)
     {
         if(countries != null && !countries.isEmpty()) {
-            System.out.printf((FIXED_WIDTH_FORMATTING) + "%n", "Country Code", "Country Name", "Country Continent", "Country Region", "Country Population", "Country Capital");
+            System.out.printf((FIXED_WIDTH_FORMATTING_WORLD) + "%n", "Country Code", "Country Name", "Country Continent", "Country Region", "Country Population", "Country Capital");
             for (Country country : countries) {
                 String country_string =
-                        String.format(FIXED_WIDTH_FORMATTING,
+                        String.format(FIXED_WIDTH_FORMATTING_WORLD,
                                 country.code, country.name, country.continent, country.region, country.population, country.capital);
                 System.out.println(country_string);
             }
@@ -626,6 +640,4 @@ public class App {
             throw new NullPointerException("ERROR! - Countries List Is Empty!");
         }
     }
-
-
 }

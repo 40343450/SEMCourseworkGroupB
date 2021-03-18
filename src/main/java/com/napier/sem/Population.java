@@ -13,7 +13,7 @@ public class Population
     /*
     * The total population of the continent/region/country.
     * */
-    private int wholeLocationPopulation;
+    private long wholeLocationPopulation;
 
     /*
     * The total population of the continent/region/country living in cities (including a %).
@@ -68,7 +68,7 @@ public class Population
      *
      * @return the whole location population
      */
-    public int getWholeLocationPopulation() {
+    public long getWholeLocationPopulation() {
         return wholeLocationPopulation;
     }
 
@@ -77,7 +77,7 @@ public class Population
      *
      * @param wholeLocationPopulation the whole location population
      */
-    public void setWholeLocationPopulation(int wholeLocationPopulation) {
+    public void setWholeLocationPopulation(long wholeLocationPopulation) {
         this.wholeLocationPopulation = wholeLocationPopulation;
     }
 
