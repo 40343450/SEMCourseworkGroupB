@@ -32,21 +32,13 @@ public class AppTest {
         ArrayList<Country> country = new ArrayList<>();
         app.printCountries(country);
     }
-    //test for null list
-    @Test
-    void printCountryTestContainsNull()
-    {
-        ArrayList<Country> countries = new ArrayList<>();
-        countries.add(null);
-        app.printCountries(countries);
-    }
     //test for non null - happy path
     @Test
     void printCountries()
     {
         ArrayList<Country> countries = new ArrayList<>();
         Country cnt = new Country();
-        cnt.code = "1";
+        cnt.code = "SCT";
         cnt.name = "Scotland";
         cnt.continent = "Europe";
         cnt.region = "Northern Europe";
