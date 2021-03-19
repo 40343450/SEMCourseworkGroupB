@@ -25,6 +25,7 @@ public class AppTest {
     {
         app.printCountries(null);
     }
+
     //test for Empty country
     @Test
     void printCountryTestEmpty()
