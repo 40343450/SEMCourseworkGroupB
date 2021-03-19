@@ -47,6 +47,11 @@ public class AppTest {
         cnt.capital = "Peking";
         countries.add(cnt);
         app.printCountries(countries);
+        assertEquals(1,countries.size());
+        for (Country c: countries)
+        {
+            assertEquals(5500000,c.population);
+        }
     }
 
 }
