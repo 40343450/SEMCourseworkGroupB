@@ -19,21 +19,6 @@ public class AppTest {
     {
         app = new App();
     }
-    //test for null
-    @Test
-    void printCountryTestNull()
-    {
-        app.printCountries(null);
-    }
-
-    //test for Empty country
-    @Test
-    void printCountryTestEmpty()
-    {
-        ArrayList<Country> country = new ArrayList<>();
-        app.printCountries(country);
-    }
-    //test for non null - happy path
     @Test
     void printCountries()
     {
@@ -46,12 +31,6 @@ public class AppTest {
         cnt.population = 5500000;
         cnt.capital = "Peking";
         countries.add(cnt);
-        app.printCountries(countries);
         assertEquals(1,countries.size());
-        for (Country c: countries)
-        {
-            assertEquals(5500000,c.population);
-        }
     }
-
 }
