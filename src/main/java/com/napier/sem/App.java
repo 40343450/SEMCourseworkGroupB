@@ -23,6 +23,10 @@ public class App {
 
     private static final String REGION = "region";
 
+    private static final String COUNTRY = "country";
+
+    private static final String DISTRICT = "district";
+
     /*
      * COMMON SQL FILTERS
      * */
@@ -31,9 +35,14 @@ public class App {
 
     private static final String STATEMENT_END = ";";
 
+
     private static final String FILTER_REGION = " AND region = ? ";
 
     private static final String FILTER_CONTINENT = " AND continent = ? ";
+
+    private static final String FILTER_COUNTRY = " AND country.name = ? ";
+
+    private static final String FILTER_DISTRICT = " AND district = ? ";
 
     private static final String LIMIT_ROWS_RETURNED = " LIMIT ";
 
@@ -68,6 +77,11 @@ public class App {
     private static final String CITY_SELECT_STATEMENT_BY_REGION = CITY_SELECT_STATEMENT + FILTER_REGION
             + ORDER_BY_POPULATION;
 
+    private static final String CITY_SELECT_STATEMENT_BY_COUNTRY = CITY_SELECT_STATEMENT + FILTER_COUNTRY
+            + ORDER_BY_POPULATION;
+
+    private static final String CITY_SELECT_STATEMENT_BY_DISTRICT = CITY_SELECT_STATEMENT + FILTER_DISTRICT
+            + ORDER_BY_POPULATION;
     /*
      * CAPITAL CITY QUERIES
      *
@@ -168,64 +182,73 @@ public class App {
          * USE CASE 8
          * */
 
-        System.out.println("\n\nUSE CASE: 8\n\n");
-
+        System.out.println("\n\nUSE CASE: 8\n\nAs a user I would like to generate a report about all the cities in a " +
+                "continent organised by largest population to smallest.");
+        a.printCities(a.getCityData(CONTINENT,"Europe",null));
 
         /*
          * USE CASE 9
          * */
 
-        System.out.println("\n\nUSE CASE: 9\n\n");
-
+        System.out.println("\n\nUSE CASE: 9\n\nAs a user I would like to generate a report about all the cities in a" +
+                " region organised by largest population to smallest.");
+        a.printCities(a.getCityData(REGION,"Western Europe",null));
 
         /*
          * USE CASE 10
          * */
 
-        System.out.println("\n\nUSE CASE: 10\n\n");
-
+        System.out.println("\n\nUSE CASE: 10\n\nAs a user I would like to generate a report about all the cities in a" +
+                " country organised by largest population to smallest.");
+        a.printCities(a.getCityData(COUNTRY,"United Kingdom",null));
 
         /*
          * USE CASE 11
          * */
 
-        System.out.println("\n\nUSE CASE: 11\n\n");
-
+        System.out.println("\n\nUSE CASE: 11\n\nAs a user I would like to generate a report about all the cities in a" +
+                " district organised by largest population to smallest.");
+        a.printCities(a.getCityData(DISTRICT,"Scotland",null));
 
         /*
          * USE CASE 12
          * */
 
-        System.out.println("\n\nUSE CASE: 12\n\n");
-
+        System.out.println("\n\nUSE CASE: 12\n\nAs a user I would like to generate a report about the top N populated" +
+                " cities in the world where N is provided by the user.");
+        a.printCities(a.getCityData(WORLD,null,2));
 
         /*
          * USE CASE 13
          * */
 
-        System.out.println("\n\nUSE CASE: 13\n\n");
-
+        System.out.println("\n\nUSE CASE: 13\n\nAs a user I would like to generate a report about the top N populated" +
+                " cities in a continent where N is provided by the user.");
+        a.printCities(a.getCityData(CONTINENT,"Europe",3));
 
         /*
          * USE CASE 14
          * */
 
-        System.out.println("\n\nUSE CASE: 14\n\n");
-
+        System.out.println("\n\nUSE CASE: 14\n\nAs a user I would like to generate a report about the top N populated" +
+                " cities in a region where N is provided by the user.");
+        a.printCities(a.getCityData(REGION,"Western Europe",2));
 
         /*
          * USE CASE 15
          * */
 
-        System.out.println("\n\nUSE CASE: 15\n\n");
-
+        System.out.println("\n\nUSE CASE: 15\n\nAs a user I would like to generate a report about the top N populated" +
+                " cities in a country where N is provided by the user.");
+        a.printCities(a.getCityData(COUNTRY,"United Kingdom",3));
 
         /*
          * USE CASE 16
          * */
 
-        System.out.println("\n\nUSE CASE: 16\n\n");
-
+        System.out.println("\n\nUSE CASE: 16\n\nAs a user I would like to generate a report about the top N populated" +
+                " cities in a district where N is provided by the user.");
+        a.printCities(a.getCityData(DISTRICT,"Scotland",2));
 
         /*
          * USE CASE 17
@@ -410,7 +433,8 @@ public class App {
                     return getCountries(filterType, null, COUNTRY_SELECT_STATEMENT_WORLD +
                             LIMIT_ROWS_RETURNED + limit + STATEMENT_END);
                 } else {
-                    return getCountries(filterType, null, COUNTRY_SELECT_STATEMENT_WORLD + STATEMENT_END);
+                    return getCountries(filterType, null, COUNTRY_SELECT_STATEMENT_WORLD +
+                            STATEMENT_END);
                 }
             case CONTINENT:
                 if (filter != null && !filter.isEmpty())
@@ -539,6 +563,42 @@ public class App {
                 {
                     System.out.println("ERROR: com.napier.sem.App.getCityData()!");
                     throw new NullPointerException("You must enter a a valid region!");
+                }
+            case COUNTRY:
+                if (filter != null && !filter.isEmpty())
+                {
+                    if (limit != null && limit > 0)
+                    {
+                        return getCities(filterType, filter, CITY_SELECT_STATEMENT_BY_COUNTRY
+                                + LIMIT_ROWS_RETURNED + limit.toString() + STATEMENT_END);
+                    }
+                    else
+                    {
+                        return getCities(filterType, filter, CITY_SELECT_STATEMENT_BY_COUNTRY
+                                + STATEMENT_END);
+                    }
+                } else
+                {
+                    System.out.println("ERROR: com.napier.sem.App.getCityData()!");
+                    throw new NullPointerException("You must enter a a valid country!");
+                }
+            case DISTRICT:
+                if (filter != null && !filter.isEmpty())
+                {
+                    if (limit != null && limit > 0)
+                    {
+                        return getCities(filterType, filter, CITY_SELECT_STATEMENT_BY_DISTRICT
+                                + LIMIT_ROWS_RETURNED + limit.toString() + STATEMENT_END);
+                    }
+                    else
+                    {
+                        return getCities(filterType, filter, CITY_SELECT_STATEMENT_BY_DISTRICT
+                                + STATEMENT_END);
+                    }
+                } else
+                {
+                    System.out.println("ERROR: com.napier.sem.App.getCityData()!");
+                    throw new NullPointerException("You must enter a a valid district!");
                 }
             default:
                 throw new IllegalArgumentException("Filter Type not valid!");
