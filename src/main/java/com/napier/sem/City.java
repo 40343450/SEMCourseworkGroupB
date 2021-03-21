@@ -35,11 +35,11 @@ public class City {
     /**
      * Instantiates a new City.
      *
-     * @param id          the id
-     * @param name        the name
-     * @param country the country code
-     * @param district    the district
-     * @param population  the population
+     * @param id         the id
+     * @param name       the name
+     * @param country    the country code
+     * @param district   the district
+     * @param population the population
      */
     public City(Integer id, String name, String country, String district, Integer population) {
         this.id = id;
