@@ -7,27 +7,27 @@ public class Country {
     /**
      * The Code.
      */
-    public String code;
+    private String code;
     /**
      * The Name.
      */
-    public String name;
+    private String name;
     /**
      * The Continent.
      */
-    public String continent;
+    private String continent;
     /**
      * The Region.
      */
-    public String region;
+    private String region;
     /**
      * The Population.
      */
-    public int population;
+    private int population;
     /**
      * The Capital.
      */
-    public String capital;
+    private String capital;
 
 
     /**

@@ -111,21 +111,21 @@ public class App {
         * */
 
         System.out.println("\n\nUSE CASE: 4\n\n");
-        a.printCountries(a.getCountryListLimitByN(REGION,"Eastern Asia", 1));
+        a.printCountries(a.getCountryListLimitByN(WORLD,null, 15));
 
         /*
          * USE CASE 5
          * */
 
         System.out.println("\n\nUSE CASE: 5\n\n");
-
+        a.printCountries(a.getCountryListLimitByN(CONTINENT,"Asia", 3));
 
         /*
          * USE CASE 6
          * */
 
         System.out.println("\n\nUSE CASE: 6\n\n");
-
+        a.printCountries(a.getCountryListLimitByN(REGION,"Eastern Asia", 3));
 
         /*
          * USE CASE 7
@@ -588,15 +588,65 @@ public class App {
         // Check one is returned
         while (rset.next()) {
             Country cnt = new Country();
-            cnt.code = rset.getString("code");
-            cnt.name = rset.getString("name");
-            cnt.continent = rset.getString("continent");
-            cnt.region = rset.getString("region");
-            cnt.population = rset.getInt("population");
-            cnt.capital = rset.getString("capital");
+            cnt.setCode(rset.getString("code"));
+            cnt.setName(rset.getString("name"));
+            cnt.setContinent(rset.getString("continent"));
+            cnt.setRegion(rset.getString("region"));
+            cnt.setPopulation(rset.getInt("population"));
+            cnt.setCapital(rset.getString("capital"));
             countries.add(cnt);
         }
         return countries;
+    }
+
+    private ArrayList<City> returnCityResultAsList(ResultSet rset) throws SQLException {
+        ArrayList<City> cities = new ArrayList<>();
+        // Check one is returned
+        while (rset.next()) {
+            City city = new City();
+            city.setId(rset.getInt("id"));
+            city.setName(rset.getString("name"));
+            city.setDistrict(rset.getString("district"));
+            city.setCountry(new Country(
+                    rset.getString("country.code"), rset.getString("name"),
+                    rset.getString("continent"), rset.getString("region"),
+                    rset.getInt("population"), rset.getString("capital")));
+            city.setPopulation(rset.getInt("population"));
+            cities.add(city);
+        }
+        return cities;
+    }
+
+
+    private ArrayList<City> returnCapitalResultAsList(ResultSet rset) throws SQLException {
+        ArrayList<City> capitals = new ArrayList<>();
+        // Check one is returned
+        while (rset.next()) {
+            City capital = new City();
+            capital.setId(rset.getInt("id"));
+            capital.setName(rset.getString("name"));
+            capital.setCountry(new Country(
+                    rset.getString("country.code"), rset.getString("name"),
+                    rset.getString("continent"), rset.getString("region"),
+                    rset.getInt("population"), rset.getString("capital")));
+            capital.setPopulation(rset.getInt("population"));
+            capitals.add(capital);
+        }
+        return capitals;
+    }
+
+    private ArrayList<Population> returnPopulationResultAsList(ResultSet rset) throws SQLException {
+        ArrayList<Population> population = new ArrayList<>();
+        // Check one is returned
+        while (rset.next()) {
+            Population pop = new Population();
+            pop.setLocationName(rset.getString("name"));
+            pop.setWholeLocationPopulation(rset.getLong("population"));
+            pop.setWholeLocationPopulationInCities(rset.getInt("country"));
+            pop.setWholeLocationPopulationNotInCities(rset.getInt("population"));
+            population.add(pop);
+        }
+        return population;
     }
 
     /*
@@ -653,7 +703,7 @@ public class App {
             for (Country country : countries) {
                 String country_string =
                         String.format(FIXED_WIDTH_FORMATTING_WORLD,
-                                country.code, country.name, country.continent, country.region, country.population, country.capital);
+                                country.getCode(), country.getName(), country.getContinent(), country.getRegion(), country.getPopulation(), country.getCapital());
                 System.out.println(country_string);
             }
         }

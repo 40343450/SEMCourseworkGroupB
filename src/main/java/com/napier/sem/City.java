@@ -8,23 +8,23 @@ public class City {
     /**
      * The Id.
      */
-    public Integer id;
+    private Integer id;
     /**
      * The Name.
      */
-    public String name;
+    private String name;
     /**
      * The Country code.
      */
-    public String country;
+    private Country country;
     /**
      * The District.
      */
-    public String district;
+    private String district;
     /**
      * The Population.
      */
-    public Integer population;
+    private Integer population;
 
     /**
      * Instantiates a new City.
@@ -41,7 +41,7 @@ public class City {
      * @param district    the district
      * @param population  the population
      */
-    public City(Integer id, String name, String country, String district, Integer population) {
+    public City(Integer id, String name, Country country, String district, Integer population) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -101,7 +101,7 @@ public class City {
      *
      * @return the country code
      */
-    public String getCountryCode() {
+    public Country getCountry() {
         return country;
     }
 
@@ -110,7 +110,7 @@ public class City {
      *
      * @param country the country code
      */
-    public void setCountryCode(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
