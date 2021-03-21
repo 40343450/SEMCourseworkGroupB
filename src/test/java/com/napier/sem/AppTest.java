@@ -21,17 +21,18 @@ public class AppTest {
     {
         app = new App();
     }
+
     @Test
     void printCountries()
     {
         ArrayList<Country> countries = new ArrayList<>();
         Country cnt = new Country();
-        cnt.code = "SCT";
-        cnt.name = "Scotland";
-        cnt.continent = "Europe";
-        cnt.region = "Northern Europe";
-        cnt.population = 5500000;
-        cnt.capital = "Peking";
+        cnt.setCode("SCT");
+        cnt.setName("Scotland");
+        cnt.setContinent("Europe");
+        cnt.setRegion("Northern Europe");
+        cnt.setPopulation(5500000);
+        cnt.setCapital("Stirling");
         countries.add(cnt);
         assertEquals(1,countries.size());
     }
