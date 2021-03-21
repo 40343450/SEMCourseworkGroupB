@@ -1,7 +1,5 @@
 package com.napier.sem;
 
-import com.napier.sem.App;
-import com.napier.sem.Country;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +21,7 @@ public class IntegrationAppTest {
     @Test
     void getCountriesCheck()
     {
-        ArrayList<Country> testList = app.getCountryListLimitByN("world",  null, 5);
+        ArrayList<Country> testList = app.getCountryData("world",  null, 5);
         Country testCountry = new Country();
         testCountry.setName("Royal Kingdom of Scotland");
         testCountry.setCode("1274");

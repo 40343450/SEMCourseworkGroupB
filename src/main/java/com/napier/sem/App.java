@@ -9,60 +9,88 @@ import java.util.ArrayList;
  */
 public class App {
 
-    private static final String FIXED_WIDTH_FORMATTING_WORLD="%-15s %-65s %-35s %-45s %-20s %-20s";//6
+    private static final String FIXED_WIDTH_FORMATTING_WORLD = "%-15s %-65s %-35s %-45s %-20s %-20s";//6
 
-    private static final String FIXED_WIDTH_FORMATTING_CITY="%-35s %-35s %-35s %-35s";//4
+    private static final String FIXED_WIDTH_FORMATTING_CITY = "%-65s %-65s %-65s %-15s";//4
 
-    private static final String FIXED_WIDTH_FORMATTING_CAP_CITY="%-35s %-35s %-35s";//3
+    private static final String FIXED_WIDTH_FORMATTING_CAP_CITY = "%-35s %-35s %-35s";//3
 
-    private static final String FIXED_WIDTH_FORMATTING_POPULATION="%-35s %-35s %-35s %-35s %-35s %-35s";//6
+    private static final String FIXED_WIDTH_FORMATTING_POPULATION = "%-35s %-35s %-35s %-35s %-35s %-35s";//6
 
     private static final String WORLD = "world";
 
-    private static final String CONTINENT  = "continent";
+    private static final String CONTINENT = "continent";
 
     private static final String REGION = "region";
 
     /*
-    * COMMON SQL FILTERS
-    * */
+     * COMMON SQL FILTERS
+     * */
 
-    private static final String ORDER_BY_POPULATION=" ORDER BY population DESC";
+    private static final String ORDER_BY_POPULATION = " ORDER BY population DESC";
 
     private static final String STATEMENT_END = ";";
 
     private static final String FILTER_REGION = " AND region = ? ";
-    
+
     private static final String FILTER_CONTINENT = " AND continent = ? ";
 
     private static final String LIMIT_ROWS_RETURNED = " LIMIT ";
 
     /*
-    * COUNTRY REPORTS QUERIES
-    * */
+     * COUNTRY REPORTS QUERIES
+     * */
 
-    private static final String COUNTRY_SELECT_STATEMENT = "SELECT country.code, country.name, country.continent, country.region, country.population, city.name as 'capital' FROM country, city where country.capital = city.id ";
+    private static final String COUNTRY_SELECT_STATEMENT = "SELECT country.code, country.name, country.continent," +
+            " country.region, country.population, city.name as 'capital' FROM country, city where country.capital " +
+            "= city.id ";
 
-    private static final String COUNTRY_SELECT_STATEMENT_WORLD=  COUNTRY_SELECT_STATEMENT + ORDER_BY_POPULATION;
+    private static final String COUNTRY_SELECT_STATEMENT_WORLD = COUNTRY_SELECT_STATEMENT + ORDER_BY_POPULATION;
 
-    private static final String COUNTRY_SELECT_STATEMENT_BY_CONTINENT= COUNTRY_SELECT_STATEMENT + FILTER_CONTINENT + ORDER_BY_POPULATION;
+    private static final String COUNTRY_SELECT_STATEMENT_BY_CONTINENT = COUNTRY_SELECT_STATEMENT + FILTER_CONTINENT
+            + ORDER_BY_POPULATION;
 
-    private static final String COUNTRY_SELECT_STATEMENT_BY_REGION= COUNTRY_SELECT_STATEMENT + FILTER_REGION + ORDER_BY_POPULATION;
-
-    /*
-    * CITY REPORTS QUERIES
-    * */
-
-
+    private static final String COUNTRY_SELECT_STATEMENT_BY_REGION = COUNTRY_SELECT_STATEMENT + FILTER_REGION
+            + ORDER_BY_POPULATION;
 
     /*
-    * PEOPLE REPORTS
-    * */
+     * CITY REPORTS QUERIES
+     * */
+
+    private static final String CITY_SELECT_STATEMENT = "SELECT city.id, city.name, country.name as 'country', " +
+            "city.district, city.population  FROM city, country where country.code = city.countrycode ";
+
+    private static final String CITY_SELECT_STATEMENT_WORLD = CITY_SELECT_STATEMENT + ORDER_BY_POPULATION;
+
+    private static final String CITY_SELECT_STATEMENT_BY_CONTINENT = CITY_SELECT_STATEMENT + FILTER_CONTINENT
+            + ORDER_BY_POPULATION;
+
+    private static final String CITY_SELECT_STATEMENT_BY_REGION = CITY_SELECT_STATEMENT + FILTER_REGION
+            + ORDER_BY_POPULATION;
+
+    /*
+     * CAPITAL CITY QUERIES
+     *
+     * */
+    private static final String CAPITAL_SELECT_STATEMENT = "SELECT city.name, country.name 'country', " +
+            "SUM(city.population) as 'population' FROM city, country where country.capital = city.id ";
+
+    private static final String CAPITAL_GROUP_BY = "GROUP BY city.name, country.name ";
+
+    private static final String CAPITAL_SELECT_STATEMENT_WORLD = CAPITAL_SELECT_STATEMENT + CAPITAL_GROUP_BY +
+            ORDER_BY_POPULATION;
+
+    private static final String CAPITAL_SELECT_STATEMENT_BY_CONTINENT = CAPITAL_SELECT_STATEMENT + FILTER_CONTINENT
+            + CAPITAL_GROUP_BY +ORDER_BY_POPULATION;
+
+    private static final String CAPITAL_SELECT_STATEMENT_BY_REGION = CAPITAL_SELECT_STATEMENT + FILTER_REGION
+            + CAPITAL_GROUP_BY +ORDER_BY_POPULATION;
+
 
 
     /*
-    * Creating an instance of Connection
-    * */
+     * Creating an instance of Connection
+     * */
     private Connection con = null;
 
     /**
@@ -76,63 +104,65 @@ public class App {
         // Connect to database
 
         // Connect to database
-        if (args.length < 1)
-        {
+        if (args.length < 1) {
             a.connect("localhost:33060");
-        }
-        else{
+        } else {
             a.connect(args[0]);
         }
 
         /*
-        * USE CASE 1
-        * */
+         * USE CASE 1
+         * */
         System.out.println("\n\nUSE CASE 1\n\nAs a user I would like to generate a report about all the" +
                 " countries in the world organised by largest population to smallest:\n\n");
-        a.printCountries(a.getCountryList(WORLD,null));
+        a.printCountries(a.getCountryData(WORLD, null, null));
 
         /*
          * USE CASE 2
          * */
         System.out.println("\n\nUSE CASE 2\n\nAs a user I would like to generate a report about all the" +
                 " countries in a continent organised by largest population to smallest:\n\n");
-        a.printCountries(a.getCountryList(CONTINENT,"Asia"));
+        a.printCountries(a.getCountryData(CONTINENT, "Asia",null));
 
         /*
          * USE CASE 3
          * */
         System.out.println("\n\nUSE CASE 3\n\nAs a user I would like to generate a report about all the" +
                 " countries in a region organised by largest population to smallest:\n\n");
-        a.printCountries(a.getCountryList(REGION,"Eastern Asia"));
+        a.printCountries(a.getCountryData(REGION, "Eastern Asia",null));
 
 
         /*
-        * USE CASE 4
-        * */
+         * USE CASE 4
+         * */
 
-        System.out.println("\n\nUSE CASE: 4\n\n");
-        a.printCountries(a.getCountryListLimitByN(WORLD,null, 15));
+        System.out.println("\n\nUSE CASE: 4\n\nAs a user I would like to generate a report about the top N " +
+                "populated countries in the world where N is provided by the user.");
+        a.printCountries(a.getCountryData(WORLD, null, 15));
 
         /*
          * USE CASE 5
          * */
 
-        System.out.println("\n\nUSE CASE: 5\n\n");
-        a.printCountries(a.getCountryListLimitByN(CONTINENT,"Asia", 3));
+        System.out.println("\n\nUSE CASE: 5\n\nAs a user I would like to generate a report about the top N " +
+                "populated countries in a continent where N is provided by the user.");
+        a.printCountries(a.getCountryData(CONTINENT, "Asia",2));
 
         /*
          * USE CASE 6
          * */
 
-        System.out.println("\n\nUSE CASE: 6\n\n");
-        a.printCountries(a.getCountryListLimitByN(REGION,"Eastern Asia", 3));
+        System.out.println("\n\nUSE CASE: 6\n\nAs a user I would like to generate a report about the top N" +
+                " populated countries in a region where N is provided by the user.");
+        a.printCountries(a.getCountryData(REGION, "Eastern Asia",2));
 
         /*
          * USE CASE 7
          * */
 
-        System.out.println("\n\nUSE CASE: 7\n\n");
-
+        System.out.println("\n\nUSE CASE: 7\n\nAs a user I would like to generate a report about all the cities in " +
+                "the world organised by largest population to smallest.");
+        a.printCities(a.getCityData(WORLD,null,null));
 
         /*
          * USE CASE 8
@@ -201,8 +231,9 @@ public class App {
          * USE CASE 17
          * */
 
-        System.out.println("\n\nUSE CASE: 17\n\n");
-
+        System.out.println("\n\nUSE CASE: 17\n\nAs a user I would like to generate a report about all the capital" +
+                " cities in the world organised by largest population to smallest.");
+        a.printCapitals(a.getCapitalCityData(WORLD, null, 2));
 
         /*
          * USE CASE 18
@@ -309,32 +340,30 @@ public class App {
         System.out.println("\n\nUSE CASE: 32\n\n");
 
 
+        System.out.println("---------------- PROGRAM REPORTS GENERATED - EXITING ----------------");
         // Disconnect from database
         a.disconnect();
     }
 
     /**
      * Connect.
+     *
+     * @param location the location
      */
     public void connect(String location)
     {
-        try
-        {
+        try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-        }
-        catch (ClassNotFoundException e)
-        {
+        } catch (ClassNotFoundException e) {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
         int retries = 10;
-        for (int i = 0; i < retries; ++i)
-        {
+        for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
-            try
-            {
+            try {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
@@ -342,27 +371,20 @@ public class App {
                         "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "coursework");
                 System.out.println("Successfully connected");
                 break;
-            }
-            catch (SQLException sqle)
-            {
+            } catch (SQLException sqle) {
                 System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
-            }
-            catch (InterruptedException ie)
-            {
+            } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
     }
 
     /**
-     *
-     *                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root",
-     *                         "coursework");
-     *
      * Disconnect.
      */
-    public void disconnect() {
+    public void disconnect()
+    {
         if (con != null) {
             try {
                 con.close();
@@ -373,217 +395,83 @@ public class App {
     }
 
     /**
-     * Gets country list.
+     * Gets country data.
      *
      * @param filterType the filter type
      * @param filter     the filter
-     * @return the country list
+     * @param limit      the limit
+     * @return the country data
      */
-    public ArrayList<Country> getCountryList(String filterType, String filter)
+    public ArrayList<Country> getCountryData(String filterType, String filter, Integer limit)
     {
-        switch(filterType)
-        {
+        switch (filterType) {
             case WORLD:
-                return getCountryListByWorld(filterType);
+                if (limit != null && limit > 0) {
+                    return getCountries(filterType, null, COUNTRY_SELECT_STATEMENT_WORLD +
+                            LIMIT_ROWS_RETURNED + limit + STATEMENT_END);
+                } else {
+                    return getCountries(filterType, null, COUNTRY_SELECT_STATEMENT_WORLD + STATEMENT_END);
+                }
             case CONTINENT:
-                return getCountryListByContinent(filterType, filter);
+                if (filter != null && !filter.isEmpty())
+                {
+                    if (limit != null && limit > 0)
+                    {
+                        return getCountries(filterType, filter, COUNTRY_SELECT_STATEMENT_BY_CONTINENT +
+                                LIMIT_ROWS_RETURNED + limit.toString() + STATEMENT_END);
+                    } else
+                    {
+                        return getCountries(filterType, filter, COUNTRY_SELECT_STATEMENT_BY_CONTINENT +
+                                STATEMENT_END);
+                    }
+                } else
+                {
+                    System.out.println("ERROR: com.napier.sem.App.getCountryData()!");
+                    throw new NullPointerException("You must enter a a valid continent!");
+                }
             case REGION:
-                return getCountryListByRegion(filterType, filter);
+                if (filter != null && !filter.isEmpty())
+                {
+                    if (limit != null && limit > 0)
+                    {
+                        return getCountries(filterType, filter, COUNTRY_SELECT_STATEMENT_BY_REGION
+                                + LIMIT_ROWS_RETURNED + limit.toString() + STATEMENT_END);
+                    }
+                    else
+                    {
+                        return getCountries(filterType, filter, COUNTRY_SELECT_STATEMENT_BY_REGION +
+                                STATEMENT_END);
+                    }
+                } else
+                {
+                    System.out.println("ERROR: com.napier.sem.App.getCountryData()!");
+                    throw new NullPointerException("You must enter a a valid region!");
+                }
             default:
-                throw new IllegalArgumentException("ERROR! - INVALID ARGUMENTS PASSED:\n\n" + "Filter: " + filter +
-                        "\nFilter Type: " + filterType);
+                throw new IllegalArgumentException("Filter Type not valid!");
         }
     }
 
-    /**
-     * Gets country list limit by n.
-     *
-     * @param filterType the filter type
-     * @param filter     the filter
-     * @param maxRows    the max rows
-     * @return the country list limit by n
-     */
-    public ArrayList<Country> getCountryListLimitByN(String filterType, String filter, Integer maxRows)
+    private ArrayList<Country> getCountries(String filterType, String filter, String sqlStatement)
     {
-        switch(filterType)
-        {
-            case WORLD:
-                return getCountryListByWorldLimitByN(filterType,maxRows);
-            case CONTINENT:
-                return getCountryListByContinentLimitByN(filterType,filter, maxRows);
-            case REGION:
-                return getCountryListByRegionLimitByN(filterType,filter, maxRows);
-            default:
-                throw new IllegalArgumentException("ERROR! - INVALID ARGUMENTS PASSED:\n\n" + "Filter: " + filter +
-                        "\nFilter Type: " + filterType + "\nMax rows: " + maxRows);
-        }
-    }
-
-    /**
-     * Gets country list by world.
-     *
-     * @return the country list by world
-     */
-    public ArrayList<Country> getCountryListByWorld(String filterType)
-    {
-        return getCountries(filterType,null, COUNTRY_SELECT_STATEMENT_WORLD + STATEMENT_END);
-    }
-
-    /**
-     * Gets country list by world limit by n.
-     *
-     * @param maxRows the max rows
-     * @return the country list by world limit by n
-     */
-    public ArrayList<Country> getCountryListByWorldLimitByN(String filterType,Integer maxRows)
-    {
-        if(maxRows != null && maxRows > 0)
-        {
-            return getCountries(filterType,null, COUNTRY_SELECT_STATEMENT_WORLD + LIMIT_ROWS_RETURNED
-                    + maxRows + STATEMENT_END);
-        }
-        else
-        {
-            System.out.println("ERROR:  getCountryListByWorldLimitByN(String filterType,Integer maxRows)\n\nMaxRows" +
-                    " invalid!");
-            return null;
-        }
-    }
-
-
-    /**
-     * Gets country list by continent.
-     *
-     * @param continent the continent
-     * @return the country list by continent
-     */
-    public ArrayList<Country> getCountryListByContinent(String filterType, String continent)
-    {
-        if(continent != null && !continent.isEmpty())
-        {
-            return getCountries(filterType,continent, COUNTRY_SELECT_STATEMENT_BY_CONTINENT);
-        }
-        else
-        {
-            throw new NullPointerException("You must enter a a valid continent!");
-        }
-    }
-
-    /**
-     * Gets country list by continent limit by n.
-     *
-     * @param continent the continent
-     * @param maxRows   the max rows
-     * @return the country list by continent limit by n
-     */
-    public ArrayList<Country> getCountryListByContinentLimitByN(String filterType,String continent, Integer maxRows)
-    {
-        if(continent != null && !continent.isEmpty())
-        {
-            if(maxRows != null && maxRows > 0)
-            {
-                return getCountries(filterType,continent, COUNTRY_SELECT_STATEMENT_BY_CONTINENT +
-                        LIMIT_ROWS_RETURNED + maxRows + STATEMENT_END);
-            }
-            else
-            {
-                System.out.println("ERROR: getCountryListByContinentLimitByN(String filterType,String continent," +
-                        " Integer maxRows)\n\nMaxRows invalid!");
-                return null;
-            }
-        }
-        else
-        {
-            throw new NullPointerException("You must enter a a valid continent!");
-        }
-    }
-
-    /**
-     * Gets country list by region.
-     *
-     * @param region the region
-     * @return the country list by region
-     */
-    public ArrayList<Country> getCountryListByRegion(String filterType, String region)
-    {
-        if(region != null && !region.isEmpty()) {
-            return getCountries(filterType,region, COUNTRY_SELECT_STATEMENT_BY_REGION);
-        }
-        else
-        {
-            throw new NullPointerException("You must enter a a valid region!");
-        }
-    }
-
-    /**
-     * Gets country list by region limit by n.
-     *
-     * @param region  the region
-     * @param maxRows the max rows
-     * @return the country list by region limit by n
-     */
-    public ArrayList<Country> getCountryListByRegionLimitByN(String filterType,String region, Integer maxRows)
-    {
-        if(region != null && !region.isEmpty()) {
-            if(maxRows != null && maxRows > 0)
-            {
-                return getCountries(filterType,region, COUNTRY_SELECT_STATEMENT_BY_REGION +
-                        LIMIT_ROWS_RETURNED + maxRows.toString() + STATEMENT_END);
-            }
-            else
-            {
-                System.out.println("ERROR: getCountryListByRegionLimitByN(String filterType,String region, " +
-                        "Integer maxRows)\n\nMaxRows invalid!");
-                return null;
-            }
-        }
-        else
-        {
-            throw new NullPointerException("You must enter a a valid region!");
-        }
-    }
-
-
-    private ArrayList<Country> getCountries(String filterType, String filter, String sqlStatement) {
         //DEBUG System.out.println(sqlStatement);
-        if(!filterType.equals(WORLD) && !(filter == null || filter.isEmpty()))
+        try
         {
-            try
+            if (filter != null && !filter.isEmpty())
             {
-                PreparedStatement stmt = con.prepareStatement(sqlStatement);
-                stmt.setString(1, filter);
-                //DEBUG System.out.println(stmt.toString());
-                ResultSet rset = stmt.executeQuery();
-                return returnCountryResultAsList(rset);
-            }
-            catch (Exception e)
+                return returnCountryResultAsList(getResultSet(filter, sqlStatement));
+            } else if (filter == null)
             {
-                System.out.println(e.getMessage());
-                return null;
+                return returnCountryResultAsList(getResultSet(sqlStatement));
             }
+        } catch (Exception e) {
+            System.out.println("ERROR getting countries:\n\n " + e);
         }
-        else if (filterType.equals(WORLD) && (filter == null || filter.isEmpty()))
-        {
-            try
-            {
-                PreparedStatement stmt = con.prepareStatement(sqlStatement);
-                //DEBUG System.out.println(stmt.toString());
-                ResultSet rset = stmt.executeQuery();
-                return returnCountryResultAsList(rset);
-            }
-            catch (Exception e)
-            {
-                System.out.println(e.getMessage());
-                return null;
-            }
-        }
-        else
-        {
-            throw new IllegalArgumentException("ERROR! - SQL STRUCTURE NOT VALID!\n");
-        }
+        return null;
     }
 
-    private ArrayList<Country> returnCountryResultAsList(ResultSet rset) throws SQLException {
+    private ArrayList<Country> returnCountryResultAsList(ResultSet rset) throws SQLException
+    {
         ArrayList<Country> countries = new ArrayList<>();
         // Check one is returned
         while (rset.next()) {
@@ -599,7 +487,84 @@ public class App {
         return countries;
     }
 
-    private ArrayList<City> returnCityResultAsList(ResultSet rset) throws SQLException {
+    /**
+     * Gets country data.
+     *
+     * @param filterType the filter type
+     * @param filter     the filter
+     * @param limit      the limit
+     * @return the country data
+     */
+    public ArrayList<City> getCityData(String filterType, String filter, Integer limit)
+    {
+        switch (filterType) {
+            case WORLD:
+                if (limit != null && limit > 0) {
+                    return getCities(filterType, null, CITY_SELECT_STATEMENT_WORLD +
+                            LIMIT_ROWS_RETURNED + limit + STATEMENT_END);
+                } else {
+                    return getCities(filterType, null, CITY_SELECT_STATEMENT_WORLD + STATEMENT_END);
+                }
+            case CONTINENT:
+                if (filter != null && !filter.isEmpty())
+                {
+                    if (limit != null && limit > 0)
+                    {
+                        return getCities(filterType, filter, CITY_SELECT_STATEMENT_BY_CONTINENT +
+                                LIMIT_ROWS_RETURNED + limit.toString() + STATEMENT_END);
+                    } else
+                    {
+                        return getCities(filterType, filter, CITY_SELECT_STATEMENT_BY_CONTINENT +
+                                STATEMENT_END);
+                    }
+                } else
+                {
+                    System.out.println("ERROR: com.napier.sem.App.getCityData()!");
+                    throw new NullPointerException("You must enter a a valid continent!");
+                }
+            case REGION:
+                if (filter != null && !filter.isEmpty())
+                {
+                    if (limit != null && limit > 0)
+                    {
+                        return getCities(filterType, filter, CITY_SELECT_STATEMENT_BY_REGION
+                                + LIMIT_ROWS_RETURNED + limit.toString() + STATEMENT_END);
+                    }
+                    else
+                    {
+                        return getCities(filterType, filter, CITY_SELECT_STATEMENT_BY_REGION
+                                + STATEMENT_END);
+                    }
+                } else
+                {
+                    System.out.println("ERROR: com.napier.sem.App.getCityData()!");
+                    throw new NullPointerException("You must enter a a valid region!");
+                }
+            default:
+                throw new IllegalArgumentException("Filter Type not valid!");
+        }
+    }
+
+    private ArrayList<City> getCities(String filterType, String filter, String sqlStatement)
+    {
+        //DEBUG System.out.println(sqlStatement);
+        try
+        {
+            if (filter != null && !filter.isEmpty())
+            {
+                return returnCityResultAsList(getResultSet(filter, sqlStatement));
+            } else if (filter == null)
+            {
+                return returnCityResultAsList(getResultSet(sqlStatement));
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR getting cities:\n\n " + e);
+        }
+        return null;
+    }
+
+    private ArrayList<City> returnCityResultAsList(ResultSet rset) throws SQLException
+    {
         ArrayList<City> cities = new ArrayList<>();
         // Check one is returned
         while (rset.next()) {
@@ -607,38 +572,147 @@ public class App {
             city.setId(rset.getInt("id"));
             city.setName(rset.getString("name"));
             city.setDistrict(rset.getString("district"));
-            city.setCountry(new Country(
-                    rset.getString("country.code"), rset.getString("name"),
-                    rset.getString("continent"), rset.getString("region"),
-                    rset.getInt("population"), rset.getString("capital")));
+            city.setCountry(rset.getString("country"));
             city.setPopulation(rset.getInt("population"));
             cities.add(city);
         }
         return cities;
     }
 
+    /**
+     * Gets country data.
+     *
+     * @param filterType the filter type
+     * @param filter     the filter
+     * @param limit      the limit
+     * @return the country data
+     */
+    public ArrayList<City> getCapitalCityData(String filterType, String filter, Integer limit)
+    {
+        switch (filterType) {
+            case WORLD:
+                if (limit != null && limit > 0) {
+                    return getCapitalCities(null, CAPITAL_SELECT_STATEMENT_WORLD +
+                            LIMIT_ROWS_RETURNED + limit + STATEMENT_END);
+                } else {
+                    return getCapitalCities(null, CAPITAL_SELECT_STATEMENT_WORLD + STATEMENT_END);
+                }
+            case CONTINENT:
+                if (filter != null && !filter.isEmpty())
+                {
+                    if (limit != null && limit > 0)
+                    {
+                        return getCapitalCities(filter, CAPITAL_SELECT_STATEMENT_BY_CONTINENT +
+                                LIMIT_ROWS_RETURNED + limit.toString() + STATEMENT_END);
+                    } else
+                    {
+                        return getCapitalCities(filter, CAPITAL_SELECT_STATEMENT_BY_CONTINENT +
+                                STATEMENT_END);
+                    }
+                } else
+                {
+                    System.out.println("ERROR: com.napier.sem.App.getCapitalCityData()!");
+                    throw new NullPointerException("You must enter a a valid continent!");
+                }
+            case REGION:
+                if (filter != null && !filter.isEmpty())
+                {
+                    if (limit != null && limit > 0)
+                    {
+                        return getCapitalCities(filter, CAPITAL_SELECT_STATEMENT_BY_REGION
+                                + LIMIT_ROWS_RETURNED + limit.toString() + STATEMENT_END);
+                    }
+                    else
+                    {
+                        return getCapitalCities(filter, CAPITAL_SELECT_STATEMENT_BY_REGION
+                                + STATEMENT_END);
+                    }
+                } else
+                {
+                    System.out.println("ERROR: com.napier.sem.App.getCapitalCityData()!");
+                    throw new NullPointerException("You must enter a a valid region!");
+                }
+            default:
+                throw new IllegalArgumentException("Filter Type not valid!");
+        }
+    }
 
-    private ArrayList<City> returnCapitalResultAsList(ResultSet rset) throws SQLException {
+    private ArrayList<City> getCapitalCities(String filter, String sqlStatement)
+    {
+        //DEBUG System.out.println(sqlStatement);
+        try
+        {
+            if (filter != null && !filter.isEmpty())
+            {
+                return returnCapitalResultAsList(getResultSet(filter, sqlStatement));
+            } else if (filter == null)
+            {
+                return returnCapitalResultAsList(getResultSet(sqlStatement));
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR getting cities:\n\n " + e);
+        }
+        return null;
+    }
+
+    private ArrayList<City> returnCapitalResultAsList(ResultSet rset) throws SQLException
+    {
         ArrayList<City> capitals = new ArrayList<>();
         // Check one is returned
         while (rset.next()) {
             City capital = new City();
-            capital.setId(rset.getInt("id"));
             capital.setName(rset.getString("name"));
-            capital.setCountry(new Country(
-                    rset.getString("country.code"), rset.getString("name"),
-                    rset.getString("continent"), rset.getString("region"),
-                    rset.getInt("population"), rset.getString("capital")));
+            capital.setCountry(rset.getString("country"));
             capital.setPopulation(rset.getInt("population"));
             capitals.add(capital);
         }
         return capitals;
     }
 
-    private ArrayList<Population> returnPopulationResultAsList(ResultSet rset) throws SQLException {
+    /**
+     * Gets country data.
+     *
+     * @param filterType the filter type
+     * @param filter     the filter
+     * @param limit      the limit
+     * @return the country data
+     */
+    public ArrayList<Population> getPopulationData(String filterType, String filter, Integer limit) {
+        switch (filterType)
+        {
+            case WORLD:
+                return getPopulation(filterType, CAPITAL_SELECT_STATEMENT_WORLD +
+                            LIMIT_ROWS_RETURNED + limit + STATEMENT_END);
+            case CONTINENT:
+                        return getPopulation(filterType, CAPITAL_SELECT_STATEMENT_BY_CONTINENT +
+                                LIMIT_ROWS_RETURNED + limit.toString() + STATEMENT_END);
+
+            case REGION:
+                        return getPopulation(filterType, CAPITAL_SELECT_STATEMENT_BY_REGION
+                                + STATEMENT_END);
+            default:
+                throw new IllegalArgumentException("Filter Type not valid!");
+        }
+    }
+
+    private ArrayList<Population> getPopulation(String filterType, String sqlStatement)
+    {
+        //DEBUG System.out.println(sqlStatement);
+        try
+        {
+                return returnPopulationResultAsList(getResultSet(sqlStatement));
+        } catch (Exception e) {
+            System.out.println("ERROR getting cities:\n\n " + e);
+        }
+        return null;
+    }
+
+    private ArrayList<Population> returnPopulationResultAsList(ResultSet rset) throws SQLException
+    {
         ArrayList<Population> population = new ArrayList<>();
         // Check one is returned
-        while (rset.next()) {
+        while (rset.next())
+        {
             Population pop = new Population();
             pop.setLocationName(rset.getString("name"));
             pop.setWholeLocationPopulation(rset.getLong("population"));
@@ -690,6 +764,19 @@ public class App {
 
     **/
 
+    private ResultSet getResultSet(String sqlStatement) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement(sqlStatement);
+        //DEBUG System.out.println(stmt.toString());
+        return stmt.executeQuery();
+    }
+
+
+    private ResultSet getResultSet(String filter, String sqlStatement) throws SQLException {
+        PreparedStatement stmt = con.prepareStatement(sqlStatement);
+        stmt.setString(1, filter);
+        //DEBUG System.out.println(stmt.toString());
+        return stmt.executeQuery();
+    }
 
     /**
      * Print countries.
@@ -698,17 +785,73 @@ public class App {
      */
     public void printCountries(ArrayList<Country> countries)
     {
-        if(countries != null && !countries.isEmpty()) {
-            System.out.printf((FIXED_WIDTH_FORMATTING_WORLD) + "%n", "Country Code", "Country Name", "Country Continent", "Country Region", "Country Population", "Country Capital");
-            for (Country country : countries) {
+        if (countries != null && !countries.isEmpty())
+        {
+            System.out.printf((FIXED_WIDTH_FORMATTING_WORLD) + "%n", "Country Code", "Country Name", "Country Continent"
+                    , "Country Region", "Country Population", "Country Capital");
+
+            for (Country country : countries)
+            {
                 String country_string =
                         String.format(FIXED_WIDTH_FORMATTING_WORLD,
-                                country.getCode(), country.getName(), country.getContinent(), country.getRegion(), country.getPopulation(), country.getCapital());
+                                country.getCode(), country.getName(), country.getContinent(), country.getRegion(),
+                                country.getPopulation(), country.getCapital());
                 System.out.println(country_string);
             }
+
+        } else {
+            System.out.println("ERROR! - Countries List Is Empty!");
         }
-        else
+    }
+
+    /**
+     * Print countries.
+     *
+     * @param cities the countries
+     */
+    public void printCities(ArrayList<City> cities)
+    {
+        if (cities != null && !cities.isEmpty())
         {
+            System.out.printf((FIXED_WIDTH_FORMATTING_CITY) + "%n","City Name", "Country"
+                    , "District", "Population");
+
+            for (City city : cities)
+            {
+                String city_string =
+                        String.format(FIXED_WIDTH_FORMATTING_CITY,
+                                city.getName(), city.getCountry(), city.getDistrict(),
+                                city.getPopulation());
+                System.out.println(city_string);
+            }
+
+        } else {
+            System.out.println("ERROR! - Countries List Is Empty!");
+        }
+    }
+
+    /**
+     * Print countries.
+     *
+     * @param cities the countries
+     */
+    public void printCapitals(ArrayList<City> cities)
+    {
+        if (cities != null && !cities.isEmpty())
+        {
+            System.out.printf((FIXED_WIDTH_FORMATTING_CAP_CITY) + "%n","City Name", "Country"
+                    ,"Population");
+
+            for (City city : cities)
+            {
+                String city_string =
+                        String.format(FIXED_WIDTH_FORMATTING_CAP_CITY,
+                                city.getName(), city.getCountry(),
+                                city.getPopulation());
+                System.out.println(city_string);
+            }
+
+        } else {
             System.out.println("ERROR! - Countries List Is Empty!");
         }
     }

@@ -16,7 +16,7 @@ public class City {
     /**
      * The Country code.
      */
-    private Country country;
+    private String country;
     /**
      * The District.
      */
@@ -41,7 +41,7 @@ public class City {
      * @param district    the district
      * @param population  the population
      */
-    public City(Integer id, String name, Country country, String district, Integer population) {
+    public City(Integer id, String name, String country, String district, Integer population) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -101,7 +101,7 @@ public class City {
      *
      * @return the country code
      */
-    public Country getCountry() {
+    public String getCountry() {
         return country;
     }
 
@@ -110,7 +110,7 @@ public class City {
      *
      * @param country the country code
      */
-    public void setCountry(Country country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 
