@@ -3,11 +3,22 @@
 ---
 
 - Master Build Status (Travis-ci):  [![Build Status](https://www.travis-ci.com/40343450/SEMCourseworkGroupB.svg?branch=master)](https://www.travis-ci.com/40343450/SEMCourseworkGroupB)
-- Release Build Status (Travis-ci): [![Build Status](https://www.travis-ci.com/40343450/SEMCourseworkGroupB.svg?branch=release)](https://www.travis-ci.com/40343450/SEMCourseworkGroupB)  
-- Develop Build Status (Travis-ci): [![Build Status](https://www.travis-ci.com/40343450/SEMCourseworkGroupB.svg?branch=develop)](https://www.travis-ci.com/40343450/SEMCourseworkGroupB)
-- Licence:                          [![LICENSE](https://img.shields.io/github/license/40343450/SEMCourseworkGroupB.svg?style=flat-square)](https://github.com/40343450/SEMCourseworkGroupB/blob/master/LICENSE)
-- Release:                          [![Releases](https://img.shields.io/github/release/40343450/SEMCourseworkGroupB/all.svg?style=flat-square)](https://github.com/40343450/SEMCourseworkGroupB/releases)
 - Code coverage:                    [![codecov](https://codecov.io/gh/40343450/SEMCourseworkGroupB/branch/master/graph/badge.svg?token=YF99KBDV1J)](https://codecov.io/gh/40343450/SEMCourseworkGroupB)
+
+
+- Release Build Status (Travis-ci): [![Build Status](https://www.travis-ci.com/40343450/SEMCourseworkGroupB.svg?branch=release)](https://www.travis-ci.com/40343450/SEMCourseworkGroupB)  
+- Code coverage:                    [![codecov](https://codecov.io/gh/40343450/SEMCourseworkGroupB/branch/release/graph/badge.svg?token=YF99KBDV1J)](https://codecov.io/gh/40343450/SEMCourseworkGroupB)
+
+
+- Develop Build Status (Travis-ci): [![Build Status](https://www.travis-ci.com/40343450/SEMCourseworkGroupB.svg?branch=develop)](https://www.travis-ci.com/40343450/SEMCourseworkGroupB)
+- Code coverage:                    [![codecov](https://codecov.io/gh/40343450/SEMCourseworkGroupB/branch/develop/graph/badge.svg?token=YF99KBDV1J)](https://codecov.io/gh/40343450/SEMCourseworkGroupB)
+
+
+- Licence:                          [![LICENSE](https://img.shields.io/github/license/40343450/SEMCourseworkGroupB.svg?style=flat-square)](https://github.com/40343450/SEMCourseworkGroupB/blob/master/LICENSE)
+
+
+- Release:                          [![Releases](https://img.shields.io/github/release/40343450/SEMCourseworkGroupB/all.svg?style=flat-square)](https://github.com/40343450/SEMCourseworkGroupB/releases)
+
 ---
 
 This is group B's coursework submission for SET08403 2020-1 TR2 001.
