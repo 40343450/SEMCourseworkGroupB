@@ -262,7 +262,7 @@ public class App {
          * USE CASE 18
          * */
 
-        System.out.println("\n\nUSE CASE: 18\n\n");
+        System.out.println("\n\nUSE CASE: 18\n\n ");
 
 
         /*
@@ -935,4 +935,27 @@ public class App {
             System.out.println("ERROR! - Countries List Is Empty!");
         }
     }
+
+    /**
+     * Print population.
+     *
+     * @param populations the populations
+     */
+    public void printPopulation(ArrayList<Population> populations)
+    {
+        if(populations != null && !populations.isEmpty()) {
+            System.out.printf((FIXED_WIDTH_FORMATTING_POPULATION) + "%n", "Name", "Total Population", "City Population", "%", "Non-City Population", "%");
+            for (Population population : populations) {
+                String population_string =
+                        String.format(FIXED_WIDTH_FORMATTING_POPULATION,
+                                population.getLocationName(), population.getWholeLocationPopulation(), population.getWholeLocationPopulationInCities(), population.getWholeLocationPopulationInCitiesPercentage(), population.getWholeLocationPopulationNotInCities(), population.getWholeLocationPopulationNotInCitiesPercentage());
+                System.out.println(population_string);
+            }
+        }
+        else
+        {
+            throw new NullPointerException("ERROR! - Population List Is Empty!");
+        }
+    }
+
 }
