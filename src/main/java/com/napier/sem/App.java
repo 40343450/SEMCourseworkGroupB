@@ -863,7 +863,27 @@ public class App {
             System.out.println("ERROR! - Countries List Is Empty!");
         }
     }
-
+    /**
+     * Print cities.
+     *
+     * @param cities the cities
+     */
+    public void printCities(ArrayList<City> cities)
+    {
+        if(cities != null && !cities.isEmpty()) {
+            System.out.printf((FIXED_WIDTH_FORMATTING_CITY) + "%n", "Name", "Country", "District", "Population");
+            for (City city : cities) {
+                String city_string =
+                        String.format(FIXED_WIDTH_FORMATTING_CITY,
+                                city.name, city.country, city.district, city.population);
+                System.out.println(city_string);
+            }
+        }
+        else
+        {
+            throw new NullPointerException("ERROR! - Cities List Is Empty!");
+        }
+    }
     /**
      * Print countries.
      *
