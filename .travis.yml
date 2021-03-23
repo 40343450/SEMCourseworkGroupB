@@ -41,4 +41,3 @@ stages:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - docker-compose up --abort-on-container-exit
