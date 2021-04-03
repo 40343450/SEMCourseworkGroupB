@@ -262,105 +262,115 @@ public class App {
          * USE CASE 18
          * */
 
-        System.out.println("\n\nUSE CASE: 18\n\n ");
+        System.out.println("\n\nUSE CASE: 18\n\n As a user i would like to generate a report about all the capital cities"+
+                " in a continent organised by largest to smallest");
 
 
         /*
          * USE CASE 19
          * */
 
-        System.out.println("\n\nUSE CASE: 19\n\n");
+        System.out.println("\n\nUSE CASE: 19\n\n As a user i would like to generate a report about all the capital cities"+
+                " in a region organised by largest to smallest");
 
 
         /*
          * USE CASE 20
          * */
 
-        System.out.println("\n\nUSE CASE: 20\n\n");
+        System.out.println("\n\nUSE CASE: 20\n\n As a user i would like to generate a report about the top N populated capital cities"+
+                " in the world where N is provided by user");
 
 
         /*
          * USE CASE 21
          * */
 
-        System.out.println("\n\nUSE CASE: 21\n\n");
+        System.out.println("\n\nUSE CASE: 21\n\n As a user i would like to generate a report about the top N populated capital cities"+
+                " in a continent where N is provided by the user");
 
 
         /*
          * USE CASE 22
          * */
 
-        System.out.println("\n\nUSE CASE: 22\n\n");
+        System.out.println("\n\nUSE CASE: 22\n\n As a user i would like to generate a report about the top N populated capital cities"+
+                " in a region where N is provided by the user");
 
 
         /*
          * USE CASE 23
          * */
 
-        System.out.println("\n\nUSE CASE: 23\n\n");
+        System.out.println("\n\nUSE CASE: 23\n\n As a user i would like to generate a report about the"+
+                " population of people, people living in cities and people not living in cities in each continent");
 
 
         /*
          * USE CASE 24
          * */
 
-        System.out.println("\n\nUSE CASE: 24\n\n");
+        System.out.println("\n\nUSE CASE: 24\n\n As a user i would like to generate a report about"+
+                " the population of people, people living in cities and people not living in cities in each region");
 
 
         /*
          * USE CASE 25
          * */
 
-        System.out.println("\n\nUSE CASE: 25\n\n");
+        System.out.println("\n\nUSE CASE: 25\n\n As a user I would like to generate a report about"+
+                " the population of people, people living in cities, and people not living in cities in each region.");
 
 
         /*
          * USE CASE 26
          * */
 
-        System.out.println("\n\nUSE CASE: 26\n\n");
+        System.out.println("\n\nUSE CASE: 26\n\n As a user I would like to make information about"+
+                " the population of the world, population of any continent, population of any region,"+
+                " population of any country, population of any district and population of any city accessible to the organisation.");
 
 
         /*
          * USE CASE 27
          * */
 
-        System.out.println("\n\nUSE CASE: 27\n\n");
+        System.out.println("\n\nUSE CASE: 27\n\n As a user I would like to be provided a number of people who speak Chinese.");
 
 
         /*
          * USE CASE 28
          * */
 
-        System.out.println("\n\nUSE CASE: 28\n\n");
+        System.out.println("\n\nUSE CASE: 28\n\n As a user I would like to be provided a number of people who speak English.");
 
 
         /*
          * USE CASE 29
          * */
 
-        System.out.println("\n\nUSE CASE: 29\n\n");
+        System.out.println("\n\nUSE CASE: 29\n\n As a user I would like to be provided a number of people who speak Hindi.");
 
 
         /*
          * USE CASE 30
          * */
 
-        System.out.println("\n\nUSE CASE: 30\n\n");
+        System.out.println("\n\nUSE CASE: 30\n\n As a user I would like to be provided a number of people who speak Spanish.");
 
 
         /*
          * USE CASE 31
          * */
 
-        System.out.println("\n\nUSE CASE: 31\n\n");
+        System.out.println("\n\nUSE CASE: 31\n\n As a user I would like to be provided a number of people who speak Spanish.");
 
 
         /*
          * USE CASE 32
          * */
 
-        System.out.println("\n\nUSE CASE: 32\n\n");
+        System.out.println("\n\nUSE CASE: 32\n\n As a user I would like to be provided a number of people who speak Arabic.");
 
 
         System.out.println("---------------- PROGRAM REPORTS GENERATED - EXITING ----------------");
