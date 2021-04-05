@@ -10,16 +10,16 @@ Company.
 Primary tasks.
 
 ## Preconditions
-we have a database containing the information about the cities and their assocaited population.
+we have a database containing the information about the cities, and their associated population in a certain region.
 
 
 ## Success End Conditions
 
-A report showing the population of people, people living in cities and people not living in cities in each country
+A report showing the population of people, people living in cities and people not living in cities in each region.
 
 ## Failed End Conditions
 
-No report showing the population of people, people living in cities and people not living in cities in each country
+No report showing the population of people, people living in cities and people not living in cities in each region.
 
 ## Primary Actor
 
@@ -31,12 +31,13 @@ The organisation needs this report to be available to users
 ## Main Success Scenario
 
 >- Report is created
->- Report details the population of people, people living in cities and people not living in cities in each country
+>- Report details the population of people, people living in cities and people not living in cities in each region.
 >- Report is available to users
 
 ## Extensions
 
 >- City does not exist:
+>- Region does not exist:
 >- User is notified
 
 ## Sub-variations
