@@ -121,5 +121,55 @@ public class AppTest {
         assertEquals(1,population.size());
     }
 
+    /**
+     * check Countries Getters
+     */
+    @Test
+    void checkCountriesGetters()
+    {
+        Country cnt = new Country("SCT", "Scotland",
+                "Europe", "Northern Europe", 5500000, "Stirling");
+        assertEquals("SCT",cnt.getCode());
+        assertEquals("Scotland",cnt.getName());
+        assertEquals("Europe",cnt.getContinent());
+        assertEquals("Northern Europe",cnt.getRegion());
+        assertEquals(5500000,cnt.getPopulation());
+        assertEquals("Stirling",cnt.getCapital());
+    }
 
+    /**
+     * check Cities Getters
+     */
+    @Test
+    void checkCitiesGetters()
+    {
+        City city = new City(1, "Glasgow",
+                "Scotland", "Finnieston ", 25000);
+        assertEquals(1,city.getId());
+        assertEquals("Glasgow",city.getName());
+        assertEquals("Scotland",city.getCountry());
+        assertEquals("Finnieston",city.getDistrict());
+        assertEquals(25000,city.getPopulation());
+    }
+
+
+    /**
+     * check Population Getters
+     */
+    @Test
+    void checkPopulationGetters()
+    {
+        Population pop = new Population("Scotland",
+                5000000, 2800000, 2200000);
+        assertEquals("Scotland",pop.getLocationName());
+        assertEquals(5000000,pop.getWholeLocationPopulation());
+        assertEquals(2800000,pop.getWholeLocationPopulationInCities());
+        //The following is a call to a calculation:
+        //getWholeLocationPopulationInCities()/wholeLocationPopulation)*100
+        assertEquals("44 %",pop.getWholeLocationPopulationInCitiesPercentage());
+        assertEquals(2200000,pop.getWholeLocationPopulationNotInCities());
+        //The following is a call to a calculation:
+        //getWholeLocationPopulationNotInCities()/wholeLocationPopulation)*100
+        assertEquals("56 %",pop.getWholeLocationPopulationNotInCitiesPercentage());
+    }
 }
