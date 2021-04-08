@@ -144,7 +144,7 @@ public class AppTest {
     void checkCitiesGetters()
     {
         City city = new City(1, "Glasgow",
-                "Scotland", "Finnieston ", 25000);
+                "Scotland", "Finnieston", 25000);
         assertEquals(1,city.getId());
         assertEquals("Glasgow",city.getName());
         assertEquals("Scotland",city.getCountry());
