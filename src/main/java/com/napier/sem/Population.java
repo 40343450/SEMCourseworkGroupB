@@ -13,16 +13,20 @@ public class Population
     /*
     * The total population of the continent/region/country.
     * */
-    private long wholeLocationPopulation;
+    private int wholeLocationPopulation;
 
     /*
     * The total population of the continent/region/country living in cities (including a %).
     * */
     private int wholeLocationPopulationInCities;
+
+    private double wholeLocationPopulationInCitiesPercentage;
     /*
     * The total population of the continent/region/country not living in cities (including a %).
     * */
     private int wholeLocationPopulationNotInCities;
+
+    private double wholeLocationPopulationNotInCitiesPercentage;
 
     /**
      * Instantiates a new Population.
@@ -68,7 +72,7 @@ public class Population
      *
      * @return the whole location population
      */
-    public long getWholeLocationPopulation() {
+    public int getWholeLocationPopulation() {
         return wholeLocationPopulation;
     }
 
@@ -77,7 +81,7 @@ public class Population
      *
      * @param wholeLocationPopulation the whole location population
      */
-    public void setWholeLocationPopulation(long wholeLocationPopulation) {
+    public void setWholeLocationPopulation(int wholeLocationPopulation) {
         this.wholeLocationPopulation = wholeLocationPopulation;
     }
 
@@ -98,9 +102,10 @@ public class Population
     /*
     * The total population of the continent/region/country living in cities (including a %).
     * */
-    public String getWholeLocationPopulationInCitiesPercentage()
+    public double getWholeLocationPopulationInCitiesPercentage()
     {
-        return ((getWholeLocationPopulationInCities()/wholeLocationPopulation)*100)+" %";
+        wholeLocationPopulationInCitiesPercentage = Math.round(((double)getWholeLocationPopulationInCities()/(double)getWholeLocationPopulation())*100);
+        return wholeLocationPopulationInCitiesPercentage;
     }
 
 
@@ -130,9 +135,9 @@ public class Population
     /*
     *The total population of the continent/region/country not living in cities (including a %).
     * */
-    public String getWholeLocationPopulationNotInCitiesPercentage()
-    {
-        return ((getWholeLocationPopulationNotInCities()/wholeLocationPopulation)*100)+" %";
+    public double getWholeLocationPopulationNotInCitiesPercentage()
+    {   wholeLocationPopulationNotInCitiesPercentage = Math.round(((double)getWholeLocationPopulationNotInCities()/(double)getWholeLocationPopulation())*100);
+        return wholeLocationPopulationNotInCitiesPercentage;
     }
 
     /**

@@ -254,7 +254,8 @@ public class App {
          * USE CASE 17
          * */
 
-        System.out.println("\n\nUSE CASE: 17\n\nAs a user I would like to generate a report about all the capital" +
+        System.out.println("\n\nUSE CASE: 17\n\nAs a user I would like to generate a report about " +
+                "all the capital" +
                 " cities in the world organised by largest population to smallest.");
         a.printCapitals(a.getCapitalCityData(WORLD, null, 2));
 
@@ -262,7 +263,8 @@ public class App {
          * USE CASE 18
          * */
 
-        System.out.println("\n\nUSE CASE: 18\n\n As a user i would like to generate a report about all the capital cities"+
+        System.out.println("\n\nUSE CASE: 18\n\n As a user i would like to generate a report about" +
+                " all the capital cities"+
                 " in a continent organised by largest to smallest");
 
 
@@ -270,7 +272,8 @@ public class App {
          * USE CASE 19
          * */
 
-        System.out.println("\n\nUSE CASE: 19\n\n As a user i would like to generate a report about all the capital cities"+
+        System.out.println("\n\nUSE CASE: 19\n\n As a user i would like to generate a report about all the " +
+                "capital cities"+
                 " in a region organised by largest to smallest");
 
 
@@ -278,7 +281,8 @@ public class App {
          * USE CASE 20
          * */
 
-        System.out.println("\n\nUSE CASE: 20\n\n As a user i would like to generate a report about the top N populated capital cities"+
+        System.out.println("\n\nUSE CASE: 20\n\n As a user i would like to generate a report about the top N " +
+                "populated capital cities"+
                 " in the world where N is provided by user");
 
 
@@ -286,7 +290,8 @@ public class App {
          * USE CASE 21
          * */
 
-        System.out.println("\n\nUSE CASE: 21\n\n As a user i would like to generate a report about the top N populated capital cities"+
+        System.out.println("\n\nUSE CASE: 21\n\n As a user i would like to generate a report about the top N " +
+                "populated capital cities"+
                 " in a continent where N is provided by the user");
 
 
@@ -294,7 +299,8 @@ public class App {
          * USE CASE 22
          * */
 
-        System.out.println("\n\nUSE CASE: 22\n\n As a user i would like to generate a report about the top N populated capital cities"+
+        System.out.println("\n\nUSE CASE: 22\n\n As a user i would like to generate a report about the top N " +
+                "populated capital cities"+
                 " in a region where N is provided by the user");
 
 
@@ -328,49 +334,56 @@ public class App {
 
         System.out.println("\n\nUSE CASE: 26\n\n As a user I would like to make information about"+
                 " the population of the world, population of any continent, population of any region,"+
-                " population of any country, population of any district and population of any city accessible to the organisation.");
+                " population of any country, population of any district and population of any city accessible to the " +
+                "organisation.");
 
 
         /*
          * USE CASE 27
          * */
 
-        System.out.println("\n\nUSE CASE: 27\n\n As a user I would like to be provided a number of people who speak Chinese.");
+        System.out.println("\n\nUSE CASE: 27\n\n As a user I would like to be provided a number of people who speak" +
+                " Chinese.");
 
 
         /*
          * USE CASE 28
          * */
 
-        System.out.println("\n\nUSE CASE: 28\n\n As a user I would like to be provided a number of people who speak English.");
+        System.out.println("\n\nUSE CASE: 28\n\n As a user I would like to be provided a number of people who speak " +
+                "English.");
 
 
         /*
          * USE CASE 29
          * */
 
-        System.out.println("\n\nUSE CASE: 29\n\n As a user I would like to be provided a number of people who speak Hindi.");
+        System.out.println("\n\nUSE CASE: 29\n\n As a user I would like to be provided a number of people who speak" +
+                " Hindi.");
 
 
         /*
          * USE CASE 30
          * */
 
-        System.out.println("\n\nUSE CASE: 30\n\n As a user I would like to be provided a number of people who speak Spanish.");
+        System.out.println("\n\nUSE CASE: 30\n\n As a user I would like to be provided a number of people who speak " +
+                "Spanish.");
 
 
         /*
          * USE CASE 31
          * */
 
-        System.out.println("\n\nUSE CASE: 31\n\n As a user I would like to be provided a number of people who speak Spanish.");
+        System.out.println("\n\nUSE CASE: 31\n\n As a user I would like to be provided a number of people who speak " +
+                "Spanish.");
 
 
         /*
          * USE CASE 32
          * */
 
-        System.out.println("\n\nUSE CASE: 32\n\n As a user I would like to be provided a number of people who speak Arabic.");
+        System.out.println("\n\nUSE CASE: 32\n\n As a user I would like to be provided a number of people who speak " +
+                "Arabic.");
 
 
         System.out.println("---------------- PROGRAM REPORTS GENERATED - EXITING ----------------");
@@ -785,7 +798,7 @@ public class App {
         {
             Population pop = new Population();
             pop.setLocationName(rset.getString("name"));
-            pop.setWholeLocationPopulation(rset.getLong("population"));
+            pop.setWholeLocationPopulation(rset.getInt("population"));
             pop.setWholeLocationPopulationInCities(rset.getInt("country"));
             pop.setWholeLocationPopulationNotInCities(rset.getInt("population"));
             population.add(pop);
@@ -930,11 +943,16 @@ public class App {
     public void printPopulation(ArrayList<Population> populations)
     {
         if(populations != null && !populations.isEmpty()) {
-            System.out.printf((FIXED_WIDTH_FORMATTING_POPULATION) + "%n", "Name", "Total Population", "City Population", "%", "Non-City Population", "%");
+            System.out.printf((FIXED_WIDTH_FORMATTING_POPULATION) + "%n", "Name", "Total Population", "City Population",
+                    "%", "Non-City Population", "%");
             for (Population population : populations) {
                 String population_string =
                         String.format(FIXED_WIDTH_FORMATTING_POPULATION,
-                                population.getLocationName(), population.getWholeLocationPopulation(), population.getWholeLocationPopulationInCities(), population.getWholeLocationPopulationInCitiesPercentage(), population.getWholeLocationPopulationNotInCities(), population.getWholeLocationPopulationNotInCitiesPercentage());
+                                population.getLocationName(), population.getWholeLocationPopulation(),
+                                population.getWholeLocationPopulationInCities(),
+                                population.getWholeLocationPopulationInCitiesPercentage(),
+                                population.getWholeLocationPopulationNotInCities(),
+                                population.getWholeLocationPopulationNotInCitiesPercentage());
                 System.out.println(population_string);
             }
         }

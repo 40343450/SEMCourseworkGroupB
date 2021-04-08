@@ -166,10 +166,10 @@ public class AppTest {
         assertEquals(2800000,pop.getWholeLocationPopulationInCities());
         //The following is a call to a calculation:
         //getWholeLocationPopulationInCities()/wholeLocationPopulation)*100
-        assertEquals("44 %",pop.getWholeLocationPopulationInCitiesPercentage());
+        assertEquals(56,pop.getWholeLocationPopulationInCitiesPercentage());
         assertEquals(2200000,pop.getWholeLocationPopulationNotInCities());
         //The following is a call to a calculation:
         //getWholeLocationPopulationNotInCities()/wholeLocationPopulation)*100
-        assertEquals("56 %",pop.getWholeLocationPopulationNotInCitiesPercentage());
+        assertEquals(44,pop.getWholeLocationPopulationNotInCitiesPercentage());
     }
 }
