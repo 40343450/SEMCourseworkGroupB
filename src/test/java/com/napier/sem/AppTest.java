@@ -55,7 +55,10 @@ public class AppTest {
         ArrayList<Country> countries = new ArrayList<>();
         while(countries.size()<5)
         {
-            countries.add(new Country(RandomStringUtils.randomAlphabetic(3,3), RandomStringUtils.randomAlphabetic(5,10), RandomStringUtils.randomAlphabetic(5,10), RandomStringUtils.randomAlphabetic(5,10), ThreadLocalRandom.current().nextInt(1, 900000000 + 1), RandomStringUtils.randomAlphabetic(5,10)));
+            countries.add(new Country(RandomStringUtils.randomAlphabetic(3,3), RandomStringUtils.randomAlphabetic(5,10),
+                    RandomStringUtils.randomAlphabetic(5,10), RandomStringUtils.randomAlphabetic(5,10),
+                    ThreadLocalRandom.current().nextInt(1, 900000000 + 1),
+                    RandomStringUtils.randomAlphabetic(5,10)));
         }
         app.printCountries(countries);
     }
@@ -86,7 +89,10 @@ public class AppTest {
         ArrayList<City> cities = new ArrayList<>();
         while(cities.size()<5)
         {
-            cities.add(new City(ThreadLocalRandom.current().nextInt(1, 9000 + 1), RandomStringUtils.randomAlphabetic(5,10), RandomStringUtils.randomAlphabetic(5,10), RandomStringUtils.randomAlphabetic(5,10), ThreadLocalRandom.current().nextInt(1, 900000000 + 1)));
+            cities.add(new City(ThreadLocalRandom.current().nextInt(1, 9000 + 1),
+                    RandomStringUtils.randomAlphabetic(5,10), RandomStringUtils.randomAlphabetic(5,10),
+                    RandomStringUtils.randomAlphabetic(5,10),
+                    ThreadLocalRandom.current().nextInt(1, 900000000 + 1)));
         }
         app.printCities(cities);
     }
@@ -100,7 +106,10 @@ public class AppTest {
         ArrayList<City> cities = new ArrayList<>();
         while(cities.size()<5)
         {
-            cities.add(new City(ThreadLocalRandom.current().nextInt(1, 9000 + 1), RandomStringUtils.randomAlphabetic(5,10), RandomStringUtils.randomAlphabetic(5,10), RandomStringUtils.randomAlphabetic(5,10), ThreadLocalRandom.current().nextInt(1, 900000000 + 1)));
+            cities.add(new City(ThreadLocalRandom.current().nextInt(1, 9000 + 1),
+                    RandomStringUtils.randomAlphabetic(5,10), RandomStringUtils.randomAlphabetic(5,10),
+                    RandomStringUtils.randomAlphabetic(5,10),
+                    ThreadLocalRandom.current().nextInt(1, 900000000 + 1)));
         }
         app.printCapitals(cities);
     }
