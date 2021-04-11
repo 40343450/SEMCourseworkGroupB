@@ -101,6 +101,49 @@ public class App {
             + CAPITAL_GROUP_BY +ORDER_BY_POPULATION;
 
 
+    /*
+     * POPULATION QUERIES
+     *
+     *
+     *
+     * private static final String WORLD = "world";
+     * private static final String CONTINENT = "continent";
+     * private static final String REGION = "region";
+     * private static final String COUNTRY = "country";
+     * private static final String DISTRICT = "district";
+     *
+     *
+     * The population of people, people living in cities, and people not living in cities in each continent.
+     * The population of people, people living in cities, and people not living in cities in each region.
+     * The population of people, people living in cities, and people not living in cities in each country.
+
+    Additionally, the following information should be accessible to the organisation:
+
+    The population of the world.
+    The population of a continent.
+    The population of a region.
+    The population of a country.
+    The population of a district.
+    The population of a city.
+
+    * Finally, the organisation has asked if it is possible to provide the number of people who speak the following the following languages from greatest number to smallest, including the percentage of the world population:
+    * Chinese.
+    * English.
+    * Hindi.
+    * Spanish.
+    * Arabic.
+    *
+    * */
+
+    private static final String POPULATION_SELECT_STATEMENT_WORLD = "SELECT 'world' as 'name', SUM(population) as 'population' FROM country ";
+
+    //TO-DO FINISH POP REPORTS
+
+    private static final String POPULATION_SELECT_STATEMENT_BY_CONTINENT = CAPITAL_SELECT_STATEMENT + FILTER_CONTINENT
+            + CAPITAL_GROUP_BY +ORDER_BY_POPULATION;
+
+    private static final String POPULATION_SELECT_STATEMENT_BY_REGION = CAPITAL_SELECT_STATEMENT + FILTER_REGION
+            + CAPITAL_GROUP_BY +ORDER_BY_POPULATION;
 
     /*
      * Creating an instance of Connection
@@ -783,8 +826,9 @@ public class App {
         //DEBUG System.out.println(sqlStatement);
         try
         {
-                return returnPopulationResultAsList(getResultSet(sqlStatement));
-        } catch (Exception e) {
+            return returnPopulationResultAsList(getResultSet(sqlStatement));
+        } catch (Exception e)
+        {
             System.out.println("ERROR getting cities:\n\n " + e);
         }
         return null;
