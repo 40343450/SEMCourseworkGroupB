@@ -168,20 +168,26 @@ public class AppTest {
     @Test
     void checkPopulationGetters()
     {
+
         String name = "Scotland";
-        Long population = Long.valueOf(1000000);
-        Long city_population = Long.valueOf(100000);
-        Population pop = new Population(name,
-                population, city_population);
-        assertEquals("Scotland",pop.getLocationName());
-        assertEquals(5000000,pop.getWholeLocationPopulation());
-        assertEquals(2800000,pop.getWholeLocationPopulationInCities());
+        Long population = Long.valueOf(5000000);
+        Long city_population = Long.valueOf(2800000);
+        Long non_city_population = Long.valueOf(2200000);
+        double non_city_pop_per = 44;
+        double city_pop_per = 56;
+
+
+        Population pop = new Population(name, population, city_population);
+
+        assertEquals(name,pop.getLocationName());
+        assertEquals(population,pop.getWholeLocationPopulation());
+        assertEquals(city_population,pop.getWholeLocationPopulationInCities());
         //The following is a call to a calculation:
         //getWholeLocationPopulationInCities()/wholeLocationPopulation)*100
-        assertEquals(56,pop.getWholeLocationPopulationInCitiesPercentage());
-        assertEquals(2200000,pop.getWholeLocationPopulationNotInCities());
+        assertEquals(city_pop_per,pop.getWholeLocationPopulationInCitiesPercentage());
+        assertEquals(non_city_population,pop.getWholeLocationPopulationNotInCities());
         //The following is a call to a calculation:
         //getWholeLocationPopulationNotInCities()/wholeLocationPopulation)*100
-        assertEquals(44,pop.getWholeLocationPopulationNotInCitiesPercentage());
+        assertEquals(non_city_pop_per,pop.getWholeLocationPopulationNotInCitiesPercentage());
     }
 }

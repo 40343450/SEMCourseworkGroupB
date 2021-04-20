@@ -899,9 +899,10 @@ public class App {
     {
         if (countries != null && !countries.isEmpty())
         {
+            System.out.println("\n\n");
             System.out.printf((FIXED_WIDTH_FORMATTING_WORLD) + "%n", "Country Code", "Country Name", "Country Continent"
                     , "Country Region", "Country Population", "Country Capital");
-
+            System.out.println("\n");
             for (Country country : countries)
             {
                 String country_string =
@@ -923,7 +924,9 @@ public class App {
     public void printCities(ArrayList<City> cities)
     {
         if(cities != null && !cities.isEmpty()) {
+            System.out.println("\n");
             System.out.printf((FIXED_WIDTH_FORMATTING_CITY) + "%n", "Name", "Country", "District", "Population");
+            System.out.println("\n\n");
             for (City city : cities) {
                 String city_string =
                         String.format(FIXED_WIDTH_FORMATTING_CITY,
@@ -947,9 +950,10 @@ public class App {
     {
         if (cities != null && !cities.isEmpty())
         {
+            System.out.println("\n\n");
             System.out.printf((FIXED_WIDTH_FORMATTING_CAP_CITY) + "%n","City Name", "Country"
                     ,"Population");
-
+            System.out.println("\n");
             for (City city : cities)
             {
                 String city_string =
@@ -972,8 +976,10 @@ public class App {
     public void printPopulation(ArrayList<Population> populations)
     {
         if(populations != null && !populations.isEmpty()) {
+            System.out.println("\n\n");
             System.out.printf((FIXED_WIDTH_FORMATTING_POPULATION) + "%n", "Name", "Total Population", "City Population",
                     "%", "Non-City Population", "%");
+            System.out.println("\n");
             for (Population population : populations) {
                 String population_string =
                         String.format(FIXED_WIDTH_FORMATTING_POPULATION,
