@@ -123,9 +123,9 @@ public class AppTest {
         ArrayList<Population> population = new ArrayList<>();
         Population pop = new Population();
         pop.setLocationName("Scotland");
-        pop.setWholeLocationPopulation(5000000);
-        pop.setWholeLocationPopulationInCities(2800000);
-        pop.setWholeLocationPopulationNotInCities(2200000);
+        pop.setWholeLocationPopulation(Long.valueOf(5000000));
+        pop.setWholeLocationPopulationInCities(Long.valueOf(2800000));
+        pop.setWholeLocationPopulationNotInCities(Long.valueOf(2200000));
         population.add(pop);
         assertEquals(1,population.size());
     }
@@ -168,8 +168,11 @@ public class AppTest {
     @Test
     void checkPopulationGetters()
     {
-        Population pop = new Population("Scotland",
-                5000000, 2800000, 2200000);
+        String name = "Scotland";
+        Long population = Long.valueOf(1000000);
+        Long city_population = Long.valueOf(100000);
+        Population pop = new Population(name,
+                population, city_population);
         assertEquals("Scotland",pop.getLocationName());
         assertEquals(5000000,pop.getWholeLocationPopulation());
         assertEquals(2800000,pop.getWholeLocationPopulationInCities());

@@ -13,18 +13,18 @@ public class Population
     /*
     * The total population of the continent/region/country.
     * */
-    private int wholeLocationPopulation;
+    private Long wholeLocationPopulation;
 
     /*
     * The total population of the continent/region/country living in cities (including a %).
     * */
-    private int wholeLocationPopulationInCities;
+    private Long wholeLocationPopulationInCities;
 
     private double wholeLocationPopulationInCitiesPercentage;
     /*
     * The total population of the continent/region/country not living in cities (including a %).
     * */
-    private int wholeLocationPopulationNotInCities;
+    private Long wholeLocationPopulationNotInCities;
 
     private double wholeLocationPopulationNotInCitiesPercentage;
 
@@ -40,13 +40,11 @@ public class Population
      * @param locationName                       the location name
      * @param wholeLocationPopulation            the whole location population
      * @param wholeLocationPopulationInCities    the whole location population in cities
-     * @param wholeLocationPopulationNotInCities the whole location population not in cities
      */
-    public Population(String locationName, int wholeLocationPopulation, int wholeLocationPopulationInCities, int wholeLocationPopulationNotInCities) {
+    public Population(String locationName, Long wholeLocationPopulation, Long wholeLocationPopulationInCities) {
         this.locationName = locationName;
         this.wholeLocationPopulation = wholeLocationPopulation;
         this.wholeLocationPopulationInCities = wholeLocationPopulationInCities;
-        this.wholeLocationPopulationNotInCities = wholeLocationPopulationNotInCities;
     }
 
     /**
@@ -72,7 +70,7 @@ public class Population
      *
      * @return the whole location population
      */
-    public int getWholeLocationPopulation() {
+    public Long getWholeLocationPopulation() {
         return wholeLocationPopulation;
     }
 
@@ -81,7 +79,7 @@ public class Population
      *
      * @param wholeLocationPopulation the whole location population
      */
-    public void setWholeLocationPopulation(int wholeLocationPopulation) {
+    public void setWholeLocationPopulation(Long wholeLocationPopulation) {
         this.wholeLocationPopulation = wholeLocationPopulation;
     }
 
@@ -90,7 +88,7 @@ public class Population
      *
      * @return the whole location population in cities
      */
-    public int getWholeLocationPopulationInCities() {
+    public Long getWholeLocationPopulationInCities() {
         return wholeLocationPopulationInCities;
     }
 
@@ -114,7 +112,7 @@ public class Population
      *
      * @param wholeLocationPopulationInCities the whole location population in cities
      */
-    public void setWholeLocationPopulationInCities(int wholeLocationPopulationInCities) {
+    public void setWholeLocationPopulationInCities(Long wholeLocationPopulationInCities) {
         this.wholeLocationPopulationInCities = wholeLocationPopulationInCities;
     }
 
@@ -123,7 +121,8 @@ public class Population
      *
      * @return the whole location population not in cities
      */
-    public int getWholeLocationPopulationNotInCities() {
+    public Long getWholeLocationPopulationNotInCities() {
+        wholeLocationPopulationNotInCities = wholeLocationPopulation - wholeLocationPopulationInCities;
         return wholeLocationPopulationNotInCities;
     }
 
@@ -145,7 +144,7 @@ public class Population
      *
      * @param wholeLocationPopulationNotInCities the whole location population not in cities
      */
-    public void setWholeLocationPopulationNotInCities(int wholeLocationPopulationNotInCities) {
+    public void setWholeLocationPopulationNotInCities(Long wholeLocationPopulationNotInCities) {
         this.wholeLocationPopulationNotInCities = wholeLocationPopulationNotInCities;
     }
 
