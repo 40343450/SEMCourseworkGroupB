@@ -32,5 +32,5 @@ This group consists of:
 * Munford, Andrew - <b>40456784</b> - https://github.com/AndyMunty
 
 Group contribution is recorded here at the linked spreadsheet below as well as GitHub metrics and analytics.\
-[Individual Assessment SET08103 Group B.xlsx](https://livenapierac-my.sharepoint.com/:x:/g/personal/40343450_live_napier_ac_uk/EV0VrnH2uO1Lv-HvMDOVHikBQK6-iSv6zNbwzI5-rAZtAQ?e=KNxVKQ)
+[Individual Assessment SET08103 Group B.xlsx](https://livenapierac-my.sharepoint.com/:x:/g/personal/40343450_live_napier_ac_uk/ETHVbPeqcMhHiCsw14ChuY8BfhRsbRodyyRdU4XGnFr9UA?e=k3oLJI)
 ---
