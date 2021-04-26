@@ -407,6 +407,7 @@ public class App {
 
         System.out.println("\n\nUSE CASE: 31\n\n As a user I would like to be provided a number of people who speak " +
                 "Arabic:\n\n");
+        //a.printLanguageData(a.getLanguageData(null, "Arabic", null));
 
 
 
