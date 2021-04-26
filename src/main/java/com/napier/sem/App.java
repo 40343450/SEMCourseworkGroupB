@@ -26,7 +26,7 @@ public class App {
     private static final String REGION = "region";
     private static final String COUNTRY = "country";
     private static final String DISTRICT = "district";
-
+    private static final String CITY = "city";
     /**
      * COMMON SQL FILTERS
      * */
