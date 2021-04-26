@@ -27,6 +27,7 @@ public class App {
 
     private static final String DISTRICT = "district";
 
+    private static final String CITY = "city";
     /*
      * COMMON SQL FILTERS
      * */
@@ -35,8 +36,9 @@ public class App {
 
     private static final String STATEMENT_END = ";";
 
-
     private static final String FILTER_REGION = " AND region = ? ";
+
+    private static final String FILTER_CITY = " AND city = ? ";
 
     private static final String FILTER_CONTINENT = " AND continent = ? ";
 
@@ -88,6 +90,10 @@ public class App {
      * */
     private static final String CAPITAL_SELECT_STATEMENT = "SELECT city.name, country.name 'country', " +
             "SUM(city.population) as 'population' FROM city, country where country.capital = city.id ";
+
+    private static final String POPULATION_GROUP_BY_DISTRICT = "GROUP BY country.district, country.population ";
+
+    private static final String POPULATION_GROUP_BY_CITY = "GROUP BY city.name, country.population ";
 
     private static final String CAPITAL_GROUP_BY = "GROUP BY city.name, country.name ";
 
