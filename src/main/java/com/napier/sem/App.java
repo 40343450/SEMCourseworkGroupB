@@ -814,6 +814,16 @@ public class App {
                                     FILTER_COUNTRY+ POPULATION_GROUP_BY_COUNTRY + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_COUNTRY +
                                     POPULATION_GROUP_BY_COUNTRY  + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+                case DISTRICT:
+                    return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_DISTRICT +
+                            FILTER_DISTRICT+ POPULATION_GROUP_BY_DISTRICT + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
+                            getPopulation(null, POPULATION_SELECT_STATEMENT_BY_DISTRICT +
+                                    POPULATION_GROUP_BY_DISTRICT + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+                case CITY:
+                    return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_CITY +
+                            FILTER_CITY+ POPULATION_GROUP_BY_CITY + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
+                            getPopulation(null, POPULATION_SELECT_STATEMENT_BY_CITY +
+                                    POPULATION_GROUP_BY_CITY + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
 
                 default:
                     throw new IllegalArgumentException("Filter Type not valid!");
