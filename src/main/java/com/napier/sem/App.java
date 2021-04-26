@@ -104,6 +104,12 @@ public class App {
     private static final String POPULATION_SELECT_STATEMENT_BY_COUNTRY = "select country.name, country.population as " +
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
+    private static final String POPULATION_SELECT_STATEMENT_BY_DISTRICT = "select country.district, country.population as " +
+            "'population', sum(city.population) as 'city_population' from country, city " +
+            "where country.code = city.countrycode ";
+    private static final String POPULATION_SELECT_STATEMENT_BY_CITY = "select city.name, country.population as " +
+            "'population', sum(city.population) as 'city_population' from country, city " +
+            "where country.code = city.countrycode ";
 
 // TODO FINAL 5 REPORTS. LANGUAGE REPORTS. ANDREW, DANIEL AND
 //  JAMES TO DO THIS AND THEN FURTHER INTEGRATION AND UNIT TESTING.
@@ -808,6 +814,7 @@ public class App {
                                     FILTER_COUNTRY+ POPULATION_GROUP_BY_COUNTRY + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_COUNTRY +
                                     POPULATION_GROUP_BY_COUNTRY  + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+
                 default:
                     throw new IllegalArgumentException("Filter Type not valid!");
             }
