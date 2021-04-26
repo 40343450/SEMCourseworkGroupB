@@ -38,7 +38,7 @@ public class App {
     private static final String FILTER_COUNTRY = " AND country.name = ? ";
     private static final String FILTER_DISTRICT = " AND district = ? ";
     private static final String LIMIT_ROWS_RETURNED = " LIMIT ";
-
+    private static final String FILTER_CITY = " AND city = ? ";
     /**
      * COUNTRY REPORTS QUERIES
      * */
