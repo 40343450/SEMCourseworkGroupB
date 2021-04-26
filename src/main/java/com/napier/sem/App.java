@@ -26,7 +26,7 @@ public class App {
     private static final String REGION = "region";
     private static final String COUNTRY = "country";
     private static final String DISTRICT = "district";
-
+    private static final String CITY = "city";
     /**
      * COMMON SQL FILTERS
      * */
@@ -38,7 +38,7 @@ public class App {
     private static final String FILTER_COUNTRY = " AND country.name = ? ";
     private static final String FILTER_DISTRICT = " AND district = ? ";
     private static final String LIMIT_ROWS_RETURNED = " LIMIT ";
-
+    private static final String FILTER_CITY = " AND city = ? ";
     /**
      * COUNTRY REPORTS QUERIES
      * */
@@ -89,6 +89,8 @@ public class App {
     private static final String POPULATION_GROUP_BY_CONTINENT = "GROUP BY country.continent ";
     private static final String POPULATION_GROUP_BY_REGION = "GROUP BY country.region ";
     private static final String POPULATION_GROUP_BY_COUNTRY = "GROUP BY country.name, country.population ";
+    private static final String POPULATION_GROUP_BY_DISTRICT = "GROUP BY country.district, country.population ";
+    private static final String POPULATION_GROUP_BY_CITY = "GROUP BY city.name, country.population ";
 
     private static final String POPULATION_SELECT_STATEMENT_WORLD = "SELECT 'WORLD' as 'name'," +
             " SUM(country.population) as 'population', sum(city.population) as 'city_population' " +
@@ -100,6 +102,12 @@ public class App {
             " SUM(country.population) as 'population', sum(city.population) as 'city_population' " +
             "FROM country, city where country.code = city.countrycode ";
     private static final String POPULATION_SELECT_STATEMENT_BY_COUNTRY = "select country.name, country.population as " +
+            "'population', sum(city.population) as 'city_population' from country, city " +
+            "where country.code = city.countrycode ";
+    private static final String POPULATION_SELECT_STATEMENT_BY_DISTRICT = "select country.district, country.population as " +
+            "'population', sum(city.population) as 'city_population' from country, city " +
+            "where country.code = city.countrycode ";
+    private static final String POPULATION_SELECT_STATEMENT_BY_CITY = "select city.name, country.population as " +
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
 
@@ -811,6 +819,18 @@ public class App {
                                     FILTER_COUNTRY+ POPULATION_GROUP_BY_COUNTRY + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_COUNTRY +
                                     POPULATION_GROUP_BY_COUNTRY  + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+                case DISTRICT:
+                    return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_DISTRICT +
+                            FILTER_DISTRICT+ POPULATION_GROUP_BY_DISTRICT + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
+                            getPopulation(null, POPULATION_SELECT_STATEMENT_BY_DISTRICT +
+                                    POPULATION_GROUP_BY_DISTRICT + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+                case CITY:
+                    return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_CITY +
+                            FILTER_CITY+ POPULATION_GROUP_BY_CITY + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
+                            getPopulation(null, POPULATION_SELECT_STATEMENT_BY_CITY +
+                                    POPULATION_GROUP_BY_CITY + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+
+
                 default:
                     throw new IllegalArgumentException("Filter Type not valid!");
             }
@@ -840,6 +860,17 @@ public class App {
                                     FILTER_COUNTRY+ POPULATION_GROUP_BY_COUNTRY + STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_COUNTRY +
                                     POPULATION_GROUP_BY_COUNTRY  +  STATEMENT_END);
+
+                case DISTRICT:
+                    return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_DISTRICT +
+                            FILTER_DISTRICT+ POPULATION_GROUP_BY_DISTRICT + STATEMENT_END) :
+                            getPopulation(null, POPULATION_SELECT_STATEMENT_BY_DISTRICT +
+                                    POPULATION_GROUP_BY_DISTRICT + STATEMENT_END);
+                case CITY:
+                    return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_CITY +
+                            FILTER_CITY+ POPULATION_GROUP_BY_CITY + STATEMENT_END) :
+                            getPopulation(null, POPULATION_SELECT_STATEMENT_BY_CITY +
+                                    POPULATION_GROUP_BY_CITY + STATEMENT_END);
                 default:
                     throw new IllegalArgumentException("Filter Type not valid!");
             }
