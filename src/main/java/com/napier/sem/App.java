@@ -89,6 +89,8 @@ public class App {
     private static final String POPULATION_GROUP_BY_CONTINENT = "GROUP BY country.continent ";
     private static final String POPULATION_GROUP_BY_REGION = "GROUP BY country.region ";
     private static final String POPULATION_GROUP_BY_COUNTRY = "GROUP BY country.name, country.population ";
+    private static final String POPULATION_GROUP_BY_DISTRICT = "GROUP BY country.district, country.population ";
+    private static final String POPULATION_GROUP_BY_CITY = "GROUP BY city.name, country.population ";
 
     private static final String POPULATION_SELECT_STATEMENT_WORLD = "SELECT 'WORLD' as 'name'," +
             " SUM(country.population) as 'population', sum(city.population) as 'city_population' " +
