@@ -88,28 +88,28 @@ public class App {
      * POPULATION QUERIES
      *
      * */
-    private static final String POPULATION_GROUP_BY_CONTINENT = "GROUP BY country.continent ";
-    private static final String POPULATION_GROUP_BY_REGION = "GROUP BY country.region ";
+    private static final String POPULATION_GROUP_BY_CONTINENT = "GROUP BY country.continent , country.population";
+    private static final String POPULATION_GROUP_BY_REGION = "GROUP BY country.region, country.population";
     private static final String POPULATION_GROUP_BY_COUNTRY = "GROUP BY country.name, country.population ";
-    private static final String POPULATION_GROUP_BY_DISTRICT = "GROUP BY country.district, country.population ";
+    private static final String POPULATION_GROUP_BY_DISTRICT = "GROUP BY city.district, country.population ";
     private static final String POPULATION_GROUP_BY_CITY = "GROUP BY city.name, country.population ";
 
     private static final String POPULATION_SELECT_STATEMENT_WORLD = "SELECT 'WORLD' as 'name'," +
-            " SUM(country.population) as 'population', sum(city.population) as 'city_population' " +
-            "FROM country, city where country.code = city.countrycode ";
-    private static final String POPULATION_SELECT_STATEMENT_BY_CONTINENT = "select country.continent, country.population as " +
+            " (select sum(population) from country) as 'population', sum(city.population) as 'city_population' " +
+            "FROM city ";
+    private static final String POPULATION_SELECT_STATEMENT_BY_CONTINENT = "select country.continent as 'name', country.population as " +
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
-    private static final String POPULATION_SELECT_STATEMENT_BY_REGION ="select country.region, country.population as " +
+    private static final String POPULATION_SELECT_STATEMENT_BY_REGION ="select country.region as 'name', country.population as " +
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
-    private static final String POPULATION_SELECT_STATEMENT_BY_COUNTRY = "select country.name, country.population as " +
+    private static final String POPULATION_SELECT_STATEMENT_BY_COUNTRY = "select country.name as 'name', country.population as " +
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
-    private static final String POPULATION_SELECT_STATEMENT_BY_DISTRICT = "select country.district, country.population as " +
+    private static final String POPULATION_SELECT_STATEMENT_BY_DISTRICT = "select city.district as 'name', country.population as " +
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
-    private static final String POPULATION_SELECT_STATEMENT_BY_CITY = "select city.name, country.population as " +
+    private static final String POPULATION_SELECT_STATEMENT_BY_CITY = "select city.name as 'name', country.population as " +
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
 
