@@ -88,21 +88,21 @@ public class App {
      * POPULATION QUERIES
      *
      * */
-    private static final String POPULATION_GROUP_BY_CONTINENT = "GROUP BY country.continent , country.population";
-    private static final String POPULATION_GROUP_BY_REGION = "GROUP BY country.region, country.population";
-    private static final String POPULATION_GROUP_BY_COUNTRY = "GROUP BY country.name, country.population ";
-    private static final String POPULATION_GROUP_BY_DISTRICT = "GROUP BY city.district, country.population ";
-    private static final String POPULATION_GROUP_BY_CITY = "GROUP BY city.name, country.population ";
+    private static final String POPULATION_GROUP_BY_CONTINENT = " GROUP BY country.continent ";
+    private static final String POPULATION_GROUP_BY_REGION = " GROUP BY country.region ";
+    private static final String POPULATION_GROUP_BY_COUNTRY = " GROUP BY country.name, country.population ";
+    private static final String POPULATION_GROUP_BY_DISTRICT = " GROUP BY city.district, country.population ";
+    private static final String POPULATION_GROUP_BY_CITY = " GROUP BY city.name, country.population ";
 
     private static final String POPULATION_SELECT_STATEMENT_WORLD = "SELECT 'WORLD' as 'name'," +
             " (select sum(population) from country) as 'population', sum(city.population) as 'city_population' " +
             "FROM city ";
-    private static final String POPULATION_SELECT_STATEMENT_BY_CONTINENT = "select country.continent as 'name', country.population as " +
-            "'population', sum(city.population) as 'city_population' from country, city " +
-            "where country.code = city.countrycode ";
-    private static final String POPULATION_SELECT_STATEMENT_BY_REGION ="select country.region as 'name', country.population as " +
-            "'population', sum(city.population) as 'city_population' from country, city " +
-            "where country.code = city.countrycode ";
+    private static final String POPULATION_SELECT_STATEMENT_BY_CONTINENT = "select country.continent as 'name', " +
+            "sum(country.population) as 'population', sum(city.city_population) as 'city_population' from country, (select city.countrycode," +
+            " sum(city.population) as 'city_population' from city group by city.countrycode) city where country.code = city.countrycode ";
+    private static final String POPULATION_SELECT_STATEMENT_BY_REGION ="select country.region as 'name', " +
+            "sum(country.population) as 'population', sum(city.city_population) as 'city_population' from country, (select city.countrycode," +
+            " sum(city.population) as 'city_population' from city group by city.countrycode) city where country.code = city.countrycode";
     private static final String POPULATION_SELECT_STATEMENT_BY_COUNTRY = "select country.name as 'name', country.population as " +
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
@@ -110,7 +110,7 @@ public class App {
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
     private static final String POPULATION_SELECT_STATEMENT_BY_CITY = "select city.name as 'name', country.population as " +
-            "'population', sum(city.population) as 'city_population' from country, city " +
+            "'population', city.population as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
 
     private static final String LANGUAGE_SELECT_STATEMENT = "select countrylanguage.countrycode, countrylanguage.language, " +
@@ -348,30 +348,19 @@ public class App {
                 " the population of the world, population of any continent, population of any region,"+
                 " population of any country, population of any district and population of any city accessible to the " +
                 "organisation:\n\n");
-        /**
-         * COMMENTING OUT AS IT FILLS THE SCREEN AND MAKES IT DIFFICULT TO ANALYSE.
-         * INSTEAD I HAVE CALLED ALL THE SAME METHODS BUT FILTERING
+
         System.out.println("\n------WORLD POPULATION---------\n");
         a.printPopulation(a.getPopulationData(WORLD, null, null));
         System.out.println("\n------CONTINENT POPULATION---------\n");
-        a.printPopulation(a.getPopulationData(CONTINENT, null, null));
+        a.printPopulation(a.getPopulationData(CONTINENT, "Asia", null));
         System.out.println("\n------REGION POPULATION---------\n");
-        a.printPopulation(a.getPopulationData(REGION, null, null));
+        a.printPopulation(a.getPopulationData(REGION, "Eastern Asia", null));
         System.out.println("\n------COUNTRY POPULATION---------\n");
-        a.printPopulation(a.getPopulationData(COUNTRY, null, null));
-        */
-        System.out.println("\n------WORLD POPULATION---------\n");
-        a.printPopulation(a.getPopulationData(WORLD, null, 10));
-        System.out.println("\n------CONTINENT POPULATION---------\n");
-        a.printPopulation(a.getPopulationData(CONTINENT, "Asia", 10));
-        System.out.println("\n------REGION POPULATION---------\n");
-        a.printPopulation(a.getPopulationData(REGION, "Eastern Asia", 10));
-        System.out.println("\n------COUNTRY POPULATION---------\n");
-        a.printPopulation(a.getPopulationData(COUNTRY, "China", 10));
+        a.printPopulation(a.getPopulationData(COUNTRY, "China", null));
         System.out.println("\n------DISTRICT POPULATION---------\n");
-        a.printPopulation(a.getPopulationData(DISTRICT, "Scotland", 10));
+        a.printPopulation(a.getPopulationData(DISTRICT, "Scotland", null));
         System.out.println("\n------CITY POPULATION---------\n");
-        a.printPopulation(a.getPopulationData(CITY, "London", 10));
+        a.printPopulation(a.getPopulationData(CITY, "Edinburgh", null));
 
 
         /**
@@ -827,9 +816,9 @@ public class App {
                                     POPULATION_GROUP_BY_DISTRICT+ ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
                 case CITY:
                     return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_CITY +
-                            FILTER_CITY+ POPULATION_GROUP_BY_CITY+ ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
+                            FILTER_CITY+ ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_CITY +
-                                    POPULATION_GROUP_BY_CITY+ ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+                                    ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
 
 
                 default:
@@ -869,9 +858,9 @@ public class App {
                                     POPULATION_GROUP_BY_DISTRICT + ORDER_BY_POPULATION+ STATEMENT_END);
                 case CITY:
                     return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_CITY +
-                            FILTER_CITY+ POPULATION_GROUP_BY_CITY + ORDER_BY_POPULATION+ STATEMENT_END) :
+                            FILTER_CITY+ ORDER_BY_POPULATION+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_CITY +
-                                    POPULATION_GROUP_BY_CITY + ORDER_BY_POPULATION+ STATEMENT_END);
+                                    ORDER_BY_POPULATION+ STATEMENT_END);
                 default:
                     throw new IllegalArgumentException("Filter Type not valid!");
             }
@@ -993,7 +982,7 @@ public class App {
     private ResultSet getResultSet(String filter, String sqlStatement) throws SQLException {
         PreparedStatement stmt = con.prepareStatement(sqlStatement);
         stmt.setString(1, filter);
-        System.out.println(stmt.toString());
+        //System.out.println(stmt.toString());
         return stmt.executeQuery();
     }
 
