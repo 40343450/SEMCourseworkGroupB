@@ -16,6 +16,7 @@ public class App {
     private static final String FIXED_WIDTH_FORMATTING_CITY = "%-65s %-65s %-65s %-15s";//4
     private static final String FIXED_WIDTH_FORMATTING_CAP_CITY = "%-35s %-35s %-35s";//3
     private static final String FIXED_WIDTH_FORMATTING_POPULATION = "%-35s %-35s %-35s %-35s %-35s %-35s";//6
+    private static final String FIXED_WIDTH_FORMATTING_LANGUAGE = "%-35s %-35s";//2
 
     /**
      * 
@@ -36,6 +37,7 @@ public class App {
     private static final String FILTER_REGION = " AND region = ? ";
     private static final String FILTER_CONTINENT = " AND continent = ? ";
     private static final String FILTER_COUNTRY = " AND country.name = ? ";
+    private static final String FILTER_LANGUAGE = " AND countrylanguage.language = ? ";
     private static final String FILTER_DISTRICT = " AND district = ? ";
     private static final String LIMIT_ROWS_RETURNED = " LIMIT ";
     private static final String FILTER_CITY = " AND city = ? ";
@@ -111,16 +113,11 @@ public class App {
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
 
-// TODO FINAL 5 REPORTS. LANGUAGE REPORTS. ANDREW, DANIEL AND
-//  JAMES TO DO THIS AND THEN FURTHER INTEGRATION AND UNIT TESTING.
-
-//    private static final String LANGUAGE_SELECT_STATEMENT = "SELECT countrylanguage.CountryCode, country.name ," +
-//            "countrylanguage.language, countrylanguage.Percentage, " +
-//            "round((country.Population/100)*countrylanguage.Percentage, 0), country.Population\n" +
-//            "FROM world.countrylanguage, world.country\n" +
-//            "WHERE countrylanguage.CountryCode =  country.CODE\n" +
-//            "order by 1\n" +
-//            ";";
+    private static final String LANGUAGE_SELECT_STATEMENT = "select countrylanguage.countrycode, countrylanguage.language, " +
+            "countrylanguage.isofficial, countrylanguage.percentage, " +
+            "country.name, country.population " +
+            "from countrylanguage, country " +
+            "where countrylanguage.countrycode = country.code ";
 
 
     /**
@@ -379,7 +376,7 @@ public class App {
 
         System.out.println("\n\nUSE CASE: 27\n\n As a user I would like to be provided a number of people who speak" +
                 " Chinese:\n\n");
-        //a.printLanguageData(a.getLanguageData(null, "Chinese", null));
+        a.printLanguageData(a.getLanguageData(null, "Chinese", null));
 
 
         /**
@@ -388,7 +385,7 @@ public class App {
 
         System.out.println("\n\nUSE CASE: 28\n\n As a user I would like to be provided a number of people who speak " +
                 "English:\n\n");
-        //a.printLanguageData(a.getLanguageData(null, "English", null));
+        a.printLanguageData(a.getLanguageData(null, "English", null));
 
 
         /**
@@ -397,7 +394,7 @@ public class App {
 
         System.out.println("\n\nUSE CASE: 29\n\n As a user I would like to be provided a number of people who speak" +
                 " Hindi:\n\n");
-        //a.printLanguageData(a.getLanguageData(null, "Hindi", null));
+        a.printLanguageData(a.getLanguageData(null, "Hindi", null));
 
 
         /**
@@ -406,7 +403,7 @@ public class App {
 
         System.out.println("\n\nUSE CASE: 30\n\n As a user I would like to be provided a number of people who speak " +
                 "Spanish:\n\n");
-        //a.printLanguageData(a.getLanguageData(null, "Spanish", null));
+        a.printLanguageData(a.getLanguageData(null, "Spanish", null));
 
 
         /**
@@ -415,7 +412,7 @@ public class App {
 
         System.out.println("\n\nUSE CASE: 31\n\n As a user I would like to be provided a number of people who speak " +
                 "Arabic:\n\n");
-        //a.printLanguageData(a.getLanguageData(null, "Arabic", null));
+        a.printLanguageData(a.getLanguageData(null, "Arabic", null));
 
 
 
@@ -444,7 +441,7 @@ public class App {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(10000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://" + location +
                         "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "coursework");
@@ -799,36 +796,36 @@ public class App {
             switch (filterType)
             {
                 case WORLD:
-                    return getPopulation(null,POPULATION_SELECT_STATEMENT_WORLD + LIMIT_ROWS_RETURNED
+                    return getPopulation(null,POPULATION_SELECT_STATEMENT_WORLD +ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED
                             + limit + STATEMENT_END);
                 case CONTINENT:
                     return (filter!=null) ?
                             getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_CONTINENT +
-                                    FILTER_CONTINENT+ POPULATION_GROUP_BY_CONTINENT + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
+                                    FILTER_CONTINENT+ POPULATION_GROUP_BY_CONTINENT +ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_CONTINENT +
-                                    POPULATION_GROUP_BY_CONTINENT  + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+                                    POPULATION_GROUP_BY_CONTINENT  + ORDER_BY_POPULATION+LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
                 case REGION:
                     return (filter!=null) ?
                             getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_REGION +
-                                    FILTER_REGION+ POPULATION_GROUP_BY_REGION + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
+                                    FILTER_REGION+ POPULATION_GROUP_BY_REGION+ ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_REGION +
-                                    POPULATION_GROUP_BY_REGION  + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+                                    POPULATION_GROUP_BY_REGION + ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
                 case COUNTRY:
                     return (filter!=null) ?
                             getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_COUNTRY +
-                                    FILTER_COUNTRY+ POPULATION_GROUP_BY_COUNTRY + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
+                                    FILTER_COUNTRY+ POPULATION_GROUP_BY_COUNTRY+ ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_COUNTRY +
-                                    POPULATION_GROUP_BY_COUNTRY  + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+                                    POPULATION_GROUP_BY_COUNTRY + ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
                 case DISTRICT:
                     return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_DISTRICT +
-                            FILTER_DISTRICT+ POPULATION_GROUP_BY_DISTRICT + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
+                            FILTER_DISTRICT+ POPULATION_GROUP_BY_DISTRICT+ ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_DISTRICT +
-                                    POPULATION_GROUP_BY_DISTRICT + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+                                    POPULATION_GROUP_BY_DISTRICT+ ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
                 case CITY:
                     return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_CITY +
-                            FILTER_CITY+ POPULATION_GROUP_BY_CITY + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
+                            FILTER_CITY+ POPULATION_GROUP_BY_CITY+ ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_CITY +
-                                    POPULATION_GROUP_BY_CITY + LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
+                                    POPULATION_GROUP_BY_CITY+ ORDER_BY_POPULATION+ LIMIT_ROWS_RETURNED + limit+ STATEMENT_END);
 
 
                 default:
@@ -845,32 +842,32 @@ public class App {
                 case CONTINENT:
                     return (filter!=null) ?
                             getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_CONTINENT +
-                                    FILTER_CONTINENT+ POPULATION_GROUP_BY_CONTINENT + STATEMENT_END) :
+                                    FILTER_CONTINENT+ POPULATION_GROUP_BY_CONTINENT + ORDER_BY_POPULATION+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_CONTINENT +
-                                    POPULATION_GROUP_BY_CONTINENT  +  STATEMENT_END);
+                                    POPULATION_GROUP_BY_CONTINENT  + ORDER_BY_POPULATION+  STATEMENT_END);
                 case REGION:
                     return (filter!=null) ?
                             getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_REGION +
-                                    FILTER_REGION+ POPULATION_GROUP_BY_REGION + STATEMENT_END) :
+                                    FILTER_REGION+ POPULATION_GROUP_BY_REGION + ORDER_BY_POPULATION+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_REGION +
-                                    POPULATION_GROUP_BY_REGION  +  STATEMENT_END);
+                                    POPULATION_GROUP_BY_REGION  + ORDER_BY_POPULATION+  STATEMENT_END);
                 case COUNTRY:
                     return (filter!=null) ?
                             getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_COUNTRY +
-                                    FILTER_COUNTRY+ POPULATION_GROUP_BY_COUNTRY + STATEMENT_END) :
+                                    FILTER_COUNTRY+ POPULATION_GROUP_BY_COUNTRY + ORDER_BY_POPULATION+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_COUNTRY +
-                                    POPULATION_GROUP_BY_COUNTRY  +  STATEMENT_END);
+                                    POPULATION_GROUP_BY_COUNTRY  + ORDER_BY_POPULATION+  STATEMENT_END);
 
                 case DISTRICT:
                     return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_DISTRICT +
-                            FILTER_DISTRICT+ POPULATION_GROUP_BY_DISTRICT + STATEMENT_END) :
+                            FILTER_DISTRICT+ POPULATION_GROUP_BY_DISTRICT + ORDER_BY_POPULATION+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_DISTRICT +
-                                    POPULATION_GROUP_BY_DISTRICT + STATEMENT_END);
+                                    POPULATION_GROUP_BY_DISTRICT + ORDER_BY_POPULATION+ STATEMENT_END);
                 case CITY:
                     return (filter!=null) ?  getPopulation(filter, POPULATION_SELECT_STATEMENT_BY_CITY +
-                            FILTER_CITY+ POPULATION_GROUP_BY_CITY + STATEMENT_END) :
+                            FILTER_CITY+ POPULATION_GROUP_BY_CITY + ORDER_BY_POPULATION+ STATEMENT_END) :
                             getPopulation(null, POPULATION_SELECT_STATEMENT_BY_CITY +
-                                    POPULATION_GROUP_BY_CITY + STATEMENT_END);
+                                    POPULATION_GROUP_BY_CITY + ORDER_BY_POPULATION+ STATEMENT_END);
                 default:
                     throw new IllegalArgumentException("Filter Type not valid!");
             }
@@ -912,17 +909,86 @@ public class App {
         return population;
     }
 
+
+    /**
+     * Gets language data.
+     *
+     * @param limit the limit
+     * @return the language data
+     */
+    public ArrayList<CountryLanguage>  getLanguageData(String filterType, String filter, Integer limit)
+    {
+        if (filter!=null)
+        {
+            return limit!= null ? getLanguage(filter,LANGUAGE_SELECT_STATEMENT + FILTER_LANGUAGE +
+                    LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) : getLanguage(filter ,LANGUAGE_SELECT_STATEMENT +
+                    FILTER_LANGUAGE + STATEMENT_END) ;
+        }
+        else
+        {
+            return limit!= null ? getLanguage(null, LANGUAGE_SELECT_STATEMENT +
+                    LIMIT_ROWS_RETURNED + limit+ STATEMENT_END) : getLanguage(null, LANGUAGE_SELECT_STATEMENT + STATEMENT_END) ;
+        }
+    }
+
+    /**
+     * Gets language.
+     *
+     * @param sqlStatement the sql statement
+     * @return the language
+     */
+    public ArrayList<CountryLanguage>  getLanguage(String filter, String sqlStatement)
+    {
+        try
+        {
+            if (filter!=null)
+            {
+                return returnLanguageDataResultAsList(getResultSet(filter,sqlStatement));
+            }else{
+                return returnLanguageDataResultAsList(getResultSet(sqlStatement));
+            }
+        } catch (Exception e)
+        {
+            System.out.println("ERROR getting CountryLanguage:\n\n " + e);
+        }
+        return null;
+    }
+
+    /**
+     * Return language data result as list array list.
+     *
+     * @param rset the rset
+     * @return the array list
+     * @throws SQLException the sql exception
+     */
+    public ArrayList<CountryLanguage> returnLanguageDataResultAsList(ResultSet rset) throws SQLException
+    {
+        ArrayList<CountryLanguage> countryLanguages = new ArrayList<>();
+        // Check one is returned
+        while (rset.next())
+        {
+            CountryLanguage countryLanguage = new CountryLanguage();
+            countryLanguage.setCode(rset.getString("CountryCode"));
+            countryLanguage.setLanguage(rset.getString("Language"));
+            countryLanguage.setOfficial(rset.getString("IsOfficial"));
+            countryLanguage.setPercentage(rset.getLong("Percentage"));
+            countryLanguage.setPopulation(new Population(rset.getString("name"),
+                    rset.getLong("Population")));
+            countryLanguages.add(countryLanguage);
+        }
+        return countryLanguages;
+    }
+
     private ResultSet getResultSet(String sqlStatement) throws SQLException {
         PreparedStatement stmt = con.prepareStatement(sqlStatement);
-        //DEBUG System.out.println(stmt.toString());
+        //System.out.println(stmt.toString());
         return stmt.executeQuery();
     }
 
 
     private ResultSet getResultSet(String filter, String sqlStatement) throws SQLException {
         PreparedStatement stmt = con.prepareStatement(sqlStatement);
-        stmt.setString(1, filter);
-        //DEBUG System.out.println(stmt.toString());
+        //stmt.setString(1, filter);
         return stmt.executeQuery();
     }
 
@@ -952,6 +1018,7 @@ public class App {
             System.out.println("ERROR! - Countries List Is Empty!");
         }
     }
+
     /**
      * Print cities.
      *
@@ -1030,6 +1097,38 @@ public class App {
         else
         {
             throw new NullPointerException("ERROR! - Population List Is Empty!");
+        }
+    }
+
+
+    /**
+     * Print language data.
+     *
+     * @param countryLanguages the country languages
+     */
+    public void printLanguageData(ArrayList<CountryLanguage> countryLanguages)
+    {
+        if(countryLanguages != null && !countryLanguages.isEmpty())
+        {
+            System.out.println("\n\n");
+            System.out.printf((FIXED_WIDTH_FORMATTING_LANGUAGE) + "%n", "Language", "Total Population");
+            System.out.println("\n");
+            String name="";
+            long totalPopulation=0;
+            for (CountryLanguage language : countryLanguages) {
+                name=language.getLanguage();
+                long population=0;
+                population=(long)(language.getPopulation().getWholeLocationPopulation()*language.getPercentage())/100;
+                totalPopulation+=population;
+            }
+
+            String language_string =
+                String.format(FIXED_WIDTH_FORMATTING_LANGUAGE,name,totalPopulation);
+            System.out.println(language_string);
+        }
+        else
+        {
+            throw new NullPointerException("ERROR! - LanguageData List Is Empty!");
         }
     }
 

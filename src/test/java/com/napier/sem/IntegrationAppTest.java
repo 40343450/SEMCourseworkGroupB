@@ -3,6 +3,7 @@ package com.napier.sem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -79,5 +80,51 @@ public class IntegrationAppTest {
         assertEquals(6, cities.size());
     }
 
+    @Test
+    void getPopulationCheck()
+    {
+        ArrayList<Population> totPopulation = app.getPopulationData("country", null, 5);
+        Population pop = new Population();
+        pop.setLocationName("United Kingdom");
+        pop.setWholeLocationPopulation(Long.valueOf(10));
+        pop.setWholeLocationPopulationInCities(Long.valueOf(6));
+        assertEquals(Long.valueOf(4), pop.getWholeLocationPopulationNotInCities());
+        assertEquals(Double.valueOf(40), pop.getWholeLocationPopulationNotInCitiesPercentage());
+        assertEquals(Double.valueOf(60), pop.getWholeLocationPopulationInCitiesPercentage());
+        totPopulation.add(pop);
+        assertEquals(6, totPopulation.size());
+    }
+
+    @Test
+    void checkCountryLanguageGetters()
+    {
+        ArrayList<CountryLanguage> langPopulation = app.getLanguageData( null,"Chinese", 5);
+
+        String countryCode = "GBR";
+        String language = "Gaelic";
+        double langPercentage = 4.0;
+        String isofficial = "T";
+        String countryName = "United Kingdom";
+        Long wholeLocationPopulation = Long.valueOf(71000000);
+        double totalPopSpeaking = Double.valueOf(wholeLocationPopulation)*langPercentage/100;
+
+        CountryLanguage cl = new CountryLanguage();
+        cl.setCode(countryCode);
+        cl.setLanguage(language);
+        cl.setPercentage(langPercentage);
+        cl.setOfficial(isofficial);
+        cl.setPopulation(new Population(countryName, wholeLocationPopulation));
+
+        assertEquals(countryCode,cl.getCode());
+        assertEquals(language,cl.getLanguage());
+        assertEquals(langPercentage,cl.getPercentage());
+        assertEquals(isofficial,cl.isOfficial());
+        assertEquals(countryName,cl.getPopulation().getLocationName());
+        assertEquals(totalPopSpeaking,cl.getPopulation().getWholeLocationPopulation()*cl.getPercentage()/100);
+
+        langPopulation.add(cl);
+        assertEquals(6, langPopulation.size());
+
+    }
 
 }

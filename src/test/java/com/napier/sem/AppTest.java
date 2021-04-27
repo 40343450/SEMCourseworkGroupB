@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -189,5 +190,63 @@ public class AppTest {
         //The following is a call to a calculation:
         //getWholeLocationPopulationNotInCities()/wholeLocationPopulation)*100
         assertEquals(non_city_pop_per,pop.getWholeLocationPopulationNotInCitiesPercentage());
+    }
+
+
+    /**
+     * check Country Language Getters
+     */
+    @Test
+    void checkCountryLanguageGetters()
+    {
+
+        String countryCode = "GBR";
+        String language = "Gaelic";
+        double langPercentage = 4.0;
+        String isofficial = "T";
+        String countryName = "United Kingdom";
+        Long wholeLocationPopulation = Long.valueOf(71000000);
+        double totalPopSpeaking = Double.valueOf(wholeLocationPopulation)*langPercentage/100;
+
+        CountryLanguage cl = new CountryLanguage();
+        cl.setCode(countryCode);
+        cl.setLanguage(language);
+        cl.setPercentage(langPercentage);
+        cl.setOfficial(isofficial);
+        cl.setPopulation(new Population(countryName, wholeLocationPopulation));
+
+        assertEquals(countryCode,cl.getCode());
+        assertEquals(language,cl.getLanguage());
+        assertEquals(langPercentage,cl.getPercentage());
+        assertEquals(isofficial,cl.isOfficial());
+        assertEquals(countryName,cl.getPopulation().getLocationName());
+        assertEquals(totalPopSpeaking,cl.getPopulation().getWholeLocationPopulation()*cl.getPercentage()/100);
+
+    }
+
+    /**
+     * check Country Language Print
+     */
+    @Test
+    void checkCountryLanguagePrint()
+    {
+        String countryCode = "GBR";
+        String language = "Gaelic";
+        double langPercentage = 4.0;
+        String isofficial = "T";
+        String countryName = "United Kingdom";
+        Long wholeLocationPopulation = Long.valueOf(71000000);
+        double totalPopSpeaking = Double.valueOf(wholeLocationPopulation)*langPercentage/100;
+
+        CountryLanguage cl = new CountryLanguage();
+        cl.setCode(countryCode);
+        cl.setLanguage(language);
+        cl.setPercentage(langPercentage);
+        cl.setOfficial(isofficial);
+        cl.setPopulation(new Population(countryName, wholeLocationPopulation));
+
+        ArrayList<CountryLanguage> clList= new ArrayList<>();
+        clList.add(cl);
+        app.printLanguageData(clList);
     }
 }

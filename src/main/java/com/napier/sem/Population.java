@@ -39,8 +39,12 @@ public class Population
      *
      * @param locationName                       the location name
      * @param wholeLocationPopulation            the whole location population
-     * @param wholeLocationPopulationInCities    the whole location population in cities
      */
+    public Population(String locationName, Long wholeLocationPopulation) {
+        this.locationName = locationName;
+        this.wholeLocationPopulation = wholeLocationPopulation;
+    }
+
     public Population(String locationName, Long wholeLocationPopulation, Long wholeLocationPopulationInCities) {
         this.locationName = locationName;
         this.wholeLocationPopulation = wholeLocationPopulation;

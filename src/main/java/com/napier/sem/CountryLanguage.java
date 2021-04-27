@@ -9,8 +9,8 @@ public class CountryLanguage {
 
     private String code;
     private String language;
-    private boolean official;
-    private BigDecimal percentage;
+    private String official;
+    private double percentage;
     private Population population;
 
     /**
@@ -22,7 +22,7 @@ public class CountryLanguage {
      * @param percentage the percentage
      * @param population the population
      */
-    public CountryLanguage(String code, String language, boolean official, BigDecimal percentage, Population population) {
+    public CountryLanguage(String code, String language, String official, double percentage, Population population) {
         this.code = code;
         this.language = language;
         this.official = official;
@@ -77,7 +77,7 @@ public class CountryLanguage {
      *
      * @return the boolean
      */
-    public boolean isOfficial() {
+    public String isOfficial() {
         return official;
     }
 
@@ -86,7 +86,7 @@ public class CountryLanguage {
      *
      * @param official the official
      */
-    public void setOfficial(boolean official) {
+    public void setOfficial(String official) {
         this.official = official;
     }
 
@@ -95,7 +95,7 @@ public class CountryLanguage {
      *
      * @return the percentage
      */
-    public BigDecimal getPercentage() {
+    public double getPercentage() {
         return percentage;
     }
 
@@ -104,7 +104,7 @@ public class CountryLanguage {
      *
      * @param percentage the percentage
      */
-    public void setPercentage(BigDecimal percentage) {
+    public void setPercentage(double percentage) {
         this.percentage = percentage;
     }
 
