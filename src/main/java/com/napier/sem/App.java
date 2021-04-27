@@ -40,7 +40,7 @@ public class App {
     private static final String FILTER_LANGUAGE = " AND countrylanguage.language = ? ";
     private static final String FILTER_DISTRICT = " AND district = ? ";
     private static final String LIMIT_ROWS_RETURNED = " LIMIT ";
-    private static final String FILTER_CITY = " AND city = ? ";
+    private static final String FILTER_CITY = " AND city.name = ? ";
     /**
      * COUNTRY REPORTS QUERIES
      * */
@@ -369,7 +369,7 @@ public class App {
         System.out.println("\n------COUNTRY POPULATION---------\n");
         a.printPopulation(a.getPopulationData(COUNTRY, "China", 10));
         System.out.println("\n------DISTRICT POPULATION---------\n");
-        a.printPopulation(a.getPopulationData(DISTRICT, "Western Europe", 10));
+        a.printPopulation(a.getPopulationData(DISTRICT, "Scotland", 10));
         System.out.println("\n------CITY POPULATION---------\n");
         a.printPopulation(a.getPopulationData(CITY, "London", 10));
 
@@ -992,8 +992,8 @@ public class App {
 
     private ResultSet getResultSet(String filter, String sqlStatement) throws SQLException {
         PreparedStatement stmt = con.prepareStatement(sqlStatement);
-        //System.out.println(stmt.toString());
         stmt.setString(1, filter);
+        System.out.println(stmt.toString());
         return stmt.executeQuery();
     }
 
