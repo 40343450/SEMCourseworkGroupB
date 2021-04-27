@@ -97,12 +97,12 @@ public class App {
     private static final String POPULATION_SELECT_STATEMENT_WORLD = "SELECT 'WORLD' as 'name'," +
             " SUM(country.population) as 'population', sum(city.population) as 'city_population' " +
             "FROM country, city where country.code = city.countrycode ";
-    private static final String POPULATION_SELECT_STATEMENT_BY_CONTINENT = "SELECT country.continent as 'name'," +
-            " SUM(country.population) as 'population', sum(city.population) as 'city_population' " +
-            "FROM country, city where country.code = city.countrycode ";
-    private static final String POPULATION_SELECT_STATEMENT_BY_REGION ="SELECT country.region as 'name'," +
-            " SUM(country.population) as 'population', sum(city.population) as 'city_population' " +
-            "FROM country, city where country.code = city.countrycode ";
+    private static final String POPULATION_SELECT_STATEMENT_BY_CONTINENT = "select country.continent, country.population as " +
+            "'population', sum(city.population) as 'city_population' from country, city " +
+            "where country.code = city.countrycode ";
+    private static final String POPULATION_SELECT_STATEMENT_BY_REGION ="select country.region, country.population as " +
+            "'population', sum(city.population) as 'city_population' from country, city " +
+            "where country.code = city.countrycode ";
     private static final String POPULATION_SELECT_STATEMENT_BY_COUNTRY = "select country.name, country.population as " +
             "'population', sum(city.population) as 'city_population' from country, city " +
             "where country.code = city.countrycode ";
@@ -337,7 +337,7 @@ public class App {
          * */
 
         System.out.println("\n\nUSE CASE: 25\n\n As a user I would like to generate a report about"+
-                " the population of people, people living in cities, and people not living in cities in each region:\n\n");
+                " the population of people, people living in cities, and people not living in cities in each country:\n\n");
         a.printPopulation(a.getPopulationData(COUNTRY, null, null));
 
         /**
@@ -368,6 +368,10 @@ public class App {
         a.printPopulation(a.getPopulationData(REGION, "Eastern Asia", 10));
         System.out.println("\n------COUNTRY POPULATION---------\n");
         a.printPopulation(a.getPopulationData(COUNTRY, "China", 10));
+        System.out.println("\n------DISTRICT POPULATION---------\n");
+        a.printPopulation(a.getPopulationData(DISTRICT, "Western Europe", 10));
+        System.out.println("\n------CITY POPULATION---------\n");
+        a.printPopulation(a.getPopulationData(CITY, "London", 10));
 
 
         /**
@@ -988,7 +992,8 @@ public class App {
 
     private ResultSet getResultSet(String filter, String sqlStatement) throws SQLException {
         PreparedStatement stmt = con.prepareStatement(sqlStatement);
-        //stmt.setString(1, filter);
+        //System.out.println(stmt.toString());
+        stmt.setString(1, filter);
         return stmt.executeQuery();
     }
 
